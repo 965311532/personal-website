@@ -24,7 +24,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Gabriele Armento — Builder for uncertain worlds",
     description:
-      "I make ambiguity operational across research, data, markets, and AI-native products.",
+      "Ideas are cheap. Evidence is the work. Products and decision systems for uncertain environments.",
     url: "https://gabrielearmento.com",
     siteName: "Gabriele Armento",
     type: "website",
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Gabriele Armento — Builder for uncertain worlds",
     description:
-      "I make ambiguity operational across research, data, markets, and AI-native products.",
+      "Ideas are cheap. Evidence is the work. Products and decision systems for uncertain environments.",
   },
   alternates: {
     canonical: "https://gabrielearmento.com",

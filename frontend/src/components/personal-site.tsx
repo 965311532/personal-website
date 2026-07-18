@@ -9,88 +9,93 @@ import {
   Mail,
 } from "lucide-react";
 
-const currentProjects = [
+const projects = [
   {
     number: "01",
     name: "Cube",
-    type: "Quantitative research system",
+    label: "Quantitative research system",
+    question: "Can a market result explain exactly why it should be trusted?",
     description:
-      "An evidence chain for market research, backtesting, execution, and monitoring, built to make every result inspectable.",
-    tags: ["Research", "Markets", "Automation"],
-    signal: "Evidence before conviction",
-    visual: "cube",
+      "An evidence chain for research, backtesting, execution, and monitoring. Every conclusion stays connected to the data and assumptions that produced it.",
+    tags: ["Markets", "Research", "Automation"],
+    kind: "cube",
   },
   {
     number: "02",
     name: "Energy",
-    type: "European power markets",
+    label: "European power markets",
+    question: "What changes when price has to answer to physics?",
     description:
-      "Rigorous data and decision systems for a market where timing, physical reality, and uncertainty all matter.",
-    tags: ["Energy", "Decision systems", "In progress"],
-    signal: "Price meets physics",
-    visual: "energy",
+      "Decision systems for power markets, where timing, physical delivery, regulation, and uncertainty have to coexist in one operating model.",
+    tags: ["Energy", "Operations", "In progress"],
+    kind: "energy",
   },
   {
     number: "03",
     name: "Wayfinder",
-    type: "Data you can trust",
+    label: "Data you can trust",
+    question: "What did we know, when did we know it, and was it healthy?",
     description:
-      "Infrastructure for knowing what data exists, where it came from, when it was known, and whether it is healthy enough to use.",
+      "Infrastructure for finding data, tracing its origin, understanding its freshness, and deciding whether it is reliable enough to use.",
     tags: ["Data", "Lineage", "Infrastructure"],
-    signal: "Know what you know",
-    visual: "wayfinder",
+    kind: "wayfinder",
   },
   {
     number: "04",
     name: "Forecast Lab",
-    type: "Auditable forecasting",
+    label: "Auditable forecasting",
+    question: "Can a belief become more useful by admitting it may be wrong?",
     description:
-      "A workbench for turning resolvable questions into explicit probabilities, causal assumptions, and honest revisions.",
+      "A workbench for resolvable questions, explicit probabilities, causal assumptions, and revisions that preserve what changed and why.",
     tags: ["Forecasting", "Evidence", "Research"],
-    signal: "Beliefs with receipts",
-    visual: "forecast",
+    kind: "forecast",
   },
 ];
 
-const archiveProjects = [
+const experiments = [
   {
     name: "Tap the Trout",
     year: "2023",
-    note: "A clicker game with one extremely clear KPI.",
     href: "https://github.com/965311532/tap-the-trout",
   },
   {
     name: "Trading signals research",
     year: "2022",
-    note: "What happens when a guru meets an actual backtest.",
     href: "https://github.com/965311532/backtesting-results",
   },
   {
     name: "Ulam’s Spiral",
     year: "2022",
-    note: "Prime numbers, arranged until a pattern appears.",
     href: "https://965311532.github.io/ulams-spiral/",
   },
 ];
 
-function ExternalArrow() {
-  return <ArrowUpRight aria-hidden="true" size={18} strokeWidth={1.8} />;
+function ExternalArrow({ size = 18 }: { size?: number }) {
+  return <ArrowUpRight aria-hidden="true" size={size} strokeWidth={1.8} />;
 }
 
-function ProjectVisual({ kind, name }: { kind: string; name: string }) {
+function EvidenceGraphic({ kind, name }: { kind: string; name: string }) {
   return (
-    <div className={`project-visual project-visual-${kind}`} aria-hidden="true">
-      <span className="visual-label">{name} / live system</span>
-      <div className="visual-canvas">
-        <i className="visual-line visual-line-one" />
-        <i className="visual-line visual-line-two" />
-        <i className="visual-line visual-line-three" />
-        <i className="visual-node visual-node-one" />
-        <i className="visual-node visual-node-two" />
-        <i className="visual-node visual-node-three" />
-        <strong>{kind === "forecast" ? "67%" : name.slice(0, 2).toUpperCase()}</strong>
+    <div className={`evidence-graphic evidence-${kind}`} aria-hidden="true">
+      <div className="evidence-head">
+        <span>{name} / evidence view</span>
+        <span>live</span>
       </div>
-      <span className="visual-status">signal / verified</span>
+      <div className="evidence-stage">
+        <span className="evidence-axis evidence-axis-x" />
+        <span className="evidence-axis evidence-axis-y" />
+        <span className="evidence-track evidence-track-one" />
+        <span className="evidence-track evidence-track-two" />
+        <i className="evidence-point evidence-point-one" />
+        <i className="evidence-point evidence-point-two" />
+        <i className="evidence-point evidence-point-three" />
+        <strong>{kind === "forecast" ? "67" : name.slice(0, 2).toUpperCase()}</strong>
+        <small>{kind === "forecast" ? "probability / %" : "signal / observed"}</small>
+      </div>
+      <div className="evidence-foot">
+        <span>source / verified</span>
+        <span>revision / 04</span>
+      </div>
     </div>
   );
 }
@@ -99,229 +104,233 @@ export function PersonalSite() {
   const [troutTaps, setTroutTaps] = useState(0);
 
   useEffect(() => {
-    const revealTargets = Array.from(
+    const targets = Array.from(
       document.querySelectorAll<HTMLElement>(
         [
-          ".manifesto-copy > *",
-          ".now-card",
-          ".now-note",
-          ".work-intro > *",
-          ".project-billboard > *",
-          ".archive-title > *",
-          ".archive-list a",
-          ".trout-copy > *",
-          ".trout-stage",
-          ".about-statement > *",
-          ".about-story p",
-          ".about-facts > div",
-          ".wall-note",
+          ".case-intro > *",
+          ".case-copy > *",
+          ".evidence-graphic",
+          ".transmission-head > *",
+          ".transmission-main > *",
+          ".transmission-note",
+          ".experiment-head > *",
+          ".experiment-list a",
+          ".control-copy > *",
+          ".trout-console",
+          ".operator-head > *",
+          ".operator-bio p",
+          ".operator-facts > div",
+          ".operator-quote",
           ".contact-section > *",
           ".site-footer > *",
         ].join(","),
       ),
     );
 
-    revealTargets.forEach((element, index) => {
-      element.dataset.punchReveal = "";
-      element.style.setProperty("--punch-stagger", `${(index % 4) * 65}ms`);
+    targets.forEach((element, index) => {
+      element.dataset.signalReveal = "";
+      element.style.setProperty("--signal-delay", `${(index % 4) * 60}ms`);
     });
 
-    document.documentElement.classList.add("punch-motion-ready");
+    document.documentElement.classList.add("signal-motion-ready");
 
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (!entry.isIntersecting) return;
-          entry.target.classList.add("is-punch-visible");
+          entry.target.classList.add("is-signal-visible");
           observer.unobserve(entry.target);
         });
       },
-      { threshold: 0.12, rootMargin: "-36px 0px" },
+      { threshold: 0.12, rootMargin: "-42px 0px" },
     );
 
-    revealTargets.forEach((element) => observer.observe(element));
+    targets.forEach((element) => observer.observe(element));
 
     return () => {
       observer.disconnect();
-      document.documentElement.classList.remove("punch-motion-ready");
+      document.documentElement.classList.remove("signal-motion-ready");
     };
   }, []);
 
   return (
-    <main className="site-shell vibe-site punch-site">
-      <header className="topbar">
-        <a className="wordmark" href="#top" aria-label="Gabriele Armento, home">
-          <span>GA</span>
-          <i aria-hidden="true" />
+    <main className="site-shell signal-site">
+      <header className="signal-nav">
+        <a className="signal-wordmark" href="#top" aria-label="Gabriele Armento, home">
+          GA<span aria-hidden="true" />
         </a>
 
-        <nav className="primary-nav" aria-label="Primary navigation">
-          <a href="#now">Now</a>
+        <nav aria-label="Primary navigation">
           <a href="#work">Work</a>
+          <a href="#now">Now</a>
           <a href="#about">About</a>
-          <a href="#contact">Contact</a>
         </nav>
 
-        <a className="availability" href="mailto:gabriele.armento@gmail.com">
-          <span aria-hidden="true" />
-          Available for good questions
+        <a className="signal-contact-link" href="mailto:gabriele.armento@gmail.com">
+          Start a conversation <ExternalArrow size={15} />
         </a>
       </header>
 
-      <section className="punch-hero" id="top">
-        <div className="hero-meta hero-meta-top">
-          <span>Independent builder</span>
-          <span>Italy / 44° N</span>
+      <section className="signal-hero" id="top">
+        <div className="signal-hero-copy">
+          <div className="signal-identity">
+            <span>Gabriele Armento</span>
+            <span>Founder + software builder</span>
+          </div>
+
+          <h1>
+            Ideas are cheap.
+            <span>Evidence is the work.</span>
+          </h1>
+
+          <div className="signal-hero-bottom">
+            <p>
+              I build products and decision systems for uncertain environments,
+              from markets and energy to data and forecasting.
+            </p>
+            <a href="#work">
+              Open the case files <ArrowDown aria-hidden="true" size={18} />
+            </a>
+          </div>
         </div>
 
-        <div className="hero-name" aria-label="Gabriele Armento">
-          <span className="hero-name-first">Gabriele</span>
-          <span className="hero-name-last">Armento</span>
-        </div>
-
-        <div className="hero-orbit" aria-label="Ask, build, test, learn">
-          <span className="orbit-word orbit-ask">Ask</span>
-          <span className="orbit-word orbit-build">Build</span>
-          <span className="orbit-word orbit-test">Test</span>
-          <span className="orbit-word orbit-learn">Learn</span>
-          <span className="orbit-ring orbit-ring-one" aria-hidden="true" />
-          <span className="orbit-ring orbit-ring-two" aria-hidden="true" />
-          <span className="orbit-core">GA</span>
-        </div>
-
-        <div className="hero-bottom">
-          <p>
-            I turn ambitious, uncertain ideas into systems that can be tested,
-            inspected, and improved.
-          </p>
-          <a href="#work" className="hero-cta">
-            Enter the work <ArrowDown aria-hidden="true" size={18} />
-          </a>
-          <div className="hero-fields" aria-hidden="true">
-            <span>Research</span>
-            <span>Data</span>
-            <span>Markets</span>
-            <span>AI</span>
+        <div className="signal-field" aria-label="A visual field separating signal from noise">
+          <div className="field-head">
+            <span>Signal / noise</span>
+            <span>44° N / Italy</span>
+          </div>
+          <div className="field-grid" aria-hidden="true">
+            {Array.from({ length: 48 }).map((_, index) => (
+              <i key={index} style={{ "--dot-index": index } as React.CSSProperties} />
+            ))}
+          </div>
+          <div className="field-signal" aria-hidden="true">
+            <span />
+            <strong>GA</strong>
+          </div>
+          <div className="field-scan" aria-hidden="true" />
+          <div className="field-foot">
+            <span>Assumptions visible</span>
+            <span>Outcomes verified</span>
           </div>
         </div>
       </section>
 
-      <section className="manifesto-section" id="now">
-        <div className="manifesto-index">
-          <span>01</span>
-          <p>Right now</p>
-        </div>
-        <div className="manifesto-copy">
-          <p className="eyebrow">The current chapter</p>
-          <h1>
-            I make ambiguity
-            <span>operational.</span>
-          </h1>
-          <p className="manifesto-aside">
-            Not by making uncertainty disappear. By making assumptions visible,
-            decisions traceable, and the next move obvious.
+      <section className="case-section" id="work">
+        <div className="case-intro">
+          <div className="section-code">
+            <span>01 / Case files</span>
+            <span>Selected systems</span>
+          </div>
+          <h2>Four questions worth building around.</h2>
+          <p>
+            Each project begins as a claim about how the world works. The product
+            is the machinery for testing that claim without losing the trail.
           </p>
         </div>
 
-        <div className="now-card">
-          <div className="now-card-head">
-            <span><i /> Building now</span>
-            <span>2026</span>
-          </div>
-          <div className="now-card-title">4NACE<sup>↗</sup></div>
-          <p>
+        <div className="case-stack">
+          {projects.map((project, index) => (
+            <article
+              className={`case-file case-${project.kind}`}
+              style={{ "--case-position": index } as React.CSSProperties}
+              key={project.name}
+            >
+              <div className="case-tab">
+                <span>{project.number}</span>
+                <span>{project.name}</span>
+                <span>Open file</span>
+              </div>
+              <div className="case-copy">
+                <div className="case-meta">
+                  <span>{project.label}</span>
+                  <span>Active / 2026</span>
+                </div>
+                <h3>{project.name}</h3>
+                <blockquote>{project.question}</blockquote>
+                <p>{project.description}</p>
+                <div className="case-tags">
+                  {project.tags.map((tag) => <span key={tag}>{tag}</span>)}
+                </div>
+              </div>
+              <EvidenceGraphic kind={project.kind} name={project.name} />
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="transmission-section" id="now">
+        <div className="transmission-head">
+          <span>02 / Current transmission</span>
+          <span>Broadcasting from 4NACE</span>
+          <span>2026 / live</span>
+        </div>
+
+        <div className="transmission-main">
+          <p className="transmission-kicker"><i /> Building now</p>
+          <h2>4NACE</h2>
+          <p className="transmission-thesis">
             A portfolio studio for AI-applied products. Different markets, one
-            operating belief: shorten the distance between an idea and a
-            verified outcome.
+            operating belief: shorten the distance between an idea and a verified outcome.
           </p>
           <a href="https://4nace.com" target="_blank" rel="noreferrer">
             Visit 4nace.com <ExternalArrow />
           </a>
         </div>
 
-        <div className="now-notes">
-          <div className="now-note">
+        <div className="transmission-notes">
+          <article className="transmission-note">
             <span>Working across</span>
-            <p>Markets, energy, data infrastructure, forecasting, AI-native workflows.</p>
-          </div>
-          <div className="now-note">
+            <p>Markets, energy, data infrastructure, forecasting, and AI-native workflows.</p>
+          </article>
+          <article className="transmission-note">
             <span>Operating method</span>
-            <p>Start with the real system. Find the weak assumption. Build the smallest useful proof.</p>
-          </div>
-          <div className="now-note now-note-accent">
+            <p>Find the weak assumption. Build the smallest useful proof. Keep the evidence attached.</p>
+          </article>
+          <article className="transmission-note">
             <span>Current obsession</span>
-            <p>Giving ambitious ideas an evidence trail.</p>
-          </div>
+            <p>Turning ambitious ideas into systems that can survive contact with reality.</p>
+          </article>
         </div>
       </section>
 
-      <section className="work-section" id="work">
-        <div className="work-intro">
-          <div>
-            <span>02 / Selected systems</span>
-            <span>Four live questions</span>
-          </div>
-          <h2>Work that earns its confidence.</h2>
-          <p>
-            These are not finished trophies. They are active systems, each one
-            designed to make a different kind of uncertainty more tractable.
-          </p>
+      <section className="experiment-section">
+        <div className="experiment-head">
+          <span>Side channel / earlier experiments</span>
+          <h2>Small proofs.<br />Useful detours.</h2>
         </div>
-
-        <div className="project-gallery">
-          {currentProjects.map((project) => (
-            <article className={`project-billboard project-${project.visual}`} key={project.name}>
-              <div className="project-copy">
-                <div className="project-kicker">
-                  <span>{project.number}</span>
-                  <span>{project.type}</span>
-                </div>
-                <h3>{project.name}</h3>
-                <p>{project.description}</p>
-                <div className="project-tags">
-                  {project.tags.map((tag) => <span key={tag}>{tag}</span>)}
-                </div>
-                <strong className="project-signal">{project.signal}</strong>
-              </div>
-              <ProjectVisual kind={project.visual} name={project.name} />
-            </article>
+        <div className="experiment-list">
+          {experiments.map((experiment) => (
+            <a href={experiment.href} target="_blank" rel="noreferrer" key={experiment.name}>
+              <span>{experiment.year}</span>
+              <strong>{experiment.name}</strong>
+              <ExternalArrow />
+            </a>
           ))}
         </div>
-
-        <div className="archive-wrap">
-          <div className="archive-title">
-            <p className="eyebrow">Earlier experiments</p>
-            <h2>Useful detours.</h2>
-          </div>
-          <div className="archive-list">
-            {archiveProjects.map((project) => (
-              <a href={project.href} target="_blank" rel="noreferrer" key={project.name}>
-                <span>{project.year}</span>
-                <strong>{project.name}</strong>
-                <p>{project.note}</p>
-                <ExternalArrow />
-              </a>
-            ))}
-          </div>
-        </div>
       </section>
 
-      <section className="fun-section" aria-labelledby="trout-title">
-        <div className="trout-copy">
-          <p className="eyebrow">A strategically vital intermission</p>
-          <h2 id="trout-title">Tap the trout.</h2>
+      <section className="control-section" aria-labelledby="trout-title">
+        <div className="control-copy">
+          <span>Quality control / highly scientific</span>
+          <h2 id="trout-title">One fish.<br />One metric.</h2>
           <p>
-            A friend and I once built a product where the whole strategy was
-            clicking a fish. Its roadmap remains refreshingly legible.
+            A friend and I once built a website whose entire product strategy
+            was clicking a trout. It remains an unusually honest dashboard.
           </p>
           <a href="https://tapthetrout.com" target="_blank" rel="noreferrer">
-            Visit the original <ExternalArrow />
+            Inspect the original <ExternalArrow />
           </a>
         </div>
-        <div className="trout-stage">
-          <div className="trout-score" aria-live="polite">
+
+        <div className="trout-console">
+          <div className="console-head">
+            <span>Tap test / v1.0</span>
+            <span>System nominal</span>
+          </div>
+          <div className="console-score" aria-live="polite">
             <span>{String(troutTaps).padStart(3, "0")}</span>
-            successful fish interactions
+            confirmed interactions
           </div>
           <button
             className="trout-button"
@@ -334,42 +343,41 @@ export function PersonalSite() {
               <i className="trout-tail" />
             </span>
           </button>
-          <span className="trout-instruction">go on, it’s locally sourced ↗</span>
+          <span className="console-instruction">press fish to validate hypothesis ↗</span>
         </div>
       </section>
 
-      <section className="about-section" id="about">
-        <div className="about-statement">
-          <p className="eyebrow">03 / The operator</p>
+      <section className="operator-section" id="about">
+        <div className="operator-head">
+          <span>03 / Operator index</span>
           <h2>
             Curious by default.
             <span>Sceptical on purpose.</span>
           </h2>
         </div>
 
-        <div className="about-body">
-          <div className="about-story">
+        <div className="operator-grid">
+          <div className="operator-bio">
             <p>
               I’m a self-taught software builder from Italy with a long-running
-              interest in automation, finance, entrepreneurship, and the
-              machinery behind good decisions.
+              interest in automation, finance, entrepreneurship, and the machinery
+              behind good decisions.
             </p>
             <p>
-              The technology changes; the instinct doesn’t: understand the
-              structure, find the weak assumption, and make something real
-              enough to test.
+              The technology changes. The instinct doesn’t: understand the
+              structure, find the weak assumption, and make something real enough to test.
             </p>
           </div>
 
-          <dl className="about-facts">
-            <div><dt>Based</dt><dd>Genoa ↔ Milan, Italy</dd></div>
-            <div><dt>Working mode</dt><dd>Ask → build → test → repeat</dd></div>
+          <dl className="operator-facts">
+            <div><dt>Base</dt><dd>Genoa ↔ Milan, Italy</dd></div>
+            <div><dt>Mode</dt><dd>Ask → build → test → repeat</dd></div>
             <div><dt>Bias</dt><dd>Evidence over theatre</dd></div>
             <div><dt>Languages</dt><dd>Italian, English, Python, TypeScript</dd></div>
           </dl>
         </div>
 
-        <aside className="wall-note">
+        <aside className="operator-quote">
           <span>Unofficial job title № 17</span>
           <blockquote>
             “The metaphorical wall my friends throw ideas at to see if they stick.”
@@ -383,16 +391,13 @@ export function PersonalSite() {
           <span>04 / Contact</span>
           <span>Good questions are always welcome.</span>
         </div>
-        <p className="eyebrow">Have a strange, difficult, or useful problem?</p>
+        <p>Have a strange, difficult, or useful problem?</p>
         <a className="contact-email" href="mailto:gabriele.armento@gmail.com">
-          Let’s talk<span>.</span>
+          Send a signal<span>.</span>
           <ArrowUpRight aria-hidden="true" />
         </a>
         <div className="contact-footer">
-          <p>
-            Email is best. Context is appreciated.<br />
-            Coffee may improve response quality.
-          </p>
+          <p>Email is best. Context is appreciated.<br />Coffee may improve response quality.</p>
           <div className="social-links">
             <a href="mailto:gabriele.armento@gmail.com"><Mail aria-hidden="true" /> Email</a>
             <a href="https://www.linkedin.com/in/gabrielearmento/" target="_blank" rel="noreferrer"><Linkedin aria-hidden="true" /> LinkedIn</a>
@@ -403,7 +408,7 @@ export function PersonalSite() {
 
       <footer className="site-footer">
         <span>© 2026 Gabriele Armento</span>
-        <span>Built in Italy. Tested on the internet.</span>
+        <span>Independent builder / Italy</span>
         <a href="#top">Back to top ↑</a>
       </footer>
     </main>

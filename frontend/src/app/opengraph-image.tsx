@@ -1,6 +1,6 @@
 import { ImageResponse } from "next/og";
 
-export const alt = "Gabriele Armento — I make ambiguity operational";
+export const alt = "Gabriele Armento — Ideas are cheap. Evidence is the work.";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -12,30 +12,56 @@ export default function OpenGraphImage() {
           width: "100%",
           height: "100%",
           display: "flex",
-          flexDirection: "column",
-          justifyContent: "space-between",
-          padding: "48px 56px",
-          color: "#111214",
-          background: "#ff5a1f",
+          color: "#151617",
+          background: "#f4f1e9",
           fontFamily: "Arial, Helvetica, sans-serif",
         }}
       >
-        <div style={{ display: "flex", justifyContent: "space-between", fontSize: 18, textTransform: "uppercase", letterSpacing: 3 }}>
-          <span>Independent builder</span>
-          <span>Italy · 44° N</span>
+        <div
+          style={{
+            width: "58%",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "space-between",
+            padding: "42px 50px",
+            borderRight: "2px solid rgba(21,22,23,.25)",
+          }}
+        >
+          <div style={{ display: "flex", justifyContent: "space-between", fontSize: 16, textTransform: "uppercase", letterSpacing: 2.5 }}>
+            <span>Gabriele Armento</span>
+            <span>Builder · Italy</span>
+          </div>
+          <div style={{ display: "flex", flexDirection: "column", fontSize: 88, fontWeight: 700, lineHeight: 0.84, letterSpacing: -6 }}>
+            <span>Ideas are cheap.</span>
+            <span style={{ color: "#a8e7ff", WebkitTextStroke: "2px #151617" }}>
+              Evidence is the work.
+            </span>
+          </div>
+          <div style={{ display: "flex", justifyContent: "space-between", paddingTop: 18, borderTop: "2px solid rgba(21,22,23,.25)", fontSize: 16 }}>
+            <span>Research · Data · Markets · AI</span>
+            <span>GA</span>
+          </div>
         </div>
-        <div style={{ display: "flex", flexDirection: "column", fontSize: 142, fontWeight: 800, lineHeight: 0.72, letterSpacing: -10, textTransform: "uppercase" }}>
-          <span>Gabriele</span>
-          <span style={{ color: "transparent", WebkitTextStroke: "3px #111214", fontSize: 142, fontWeight: 800, letterSpacing: -10 }}>
-            Armento
-          </span>
-        </div>
-        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", borderTop: "2px solid rgba(17,18,20,.35)", paddingTop: 20, fontSize: 18 }}>
-          <span>I make ambiguity operational.</span>
-          <span style={{ display: "flex", alignItems: "center", gap: 10 }}>
-            <span style={{ width: 12, height: 12, borderRadius: 999, background: "#111214" }} />
-            gabrielearmento.com
-          </span>
+
+        <div
+          style={{
+            width: "42%",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            position: "relative",
+            background: "#a8e7ff",
+          }}
+        >
+          <div style={{ position: "absolute", top: 42, left: 38, right: 38, display: "flex", justifyContent: "space-between", fontSize: 15, textTransform: "uppercase", letterSpacing: 2 }}>
+            <span>Signal</span>
+            <span>Noise</span>
+          </div>
+          <div style={{ width: 330, height: 330, display: "flex", alignItems: "center", justifyContent: "center", border: "2px solid #151617", borderRadius: 999, boxShadow: "0 0 0 58px rgba(21,22,23,.05), 0 0 0 116px rgba(21,22,23,.035)" }}>
+            <div style={{ width: 120, height: 120, display: "flex", alignItems: "center", justifyContent: "center", borderRadius: 999, background: "#151617", color: "#a8e7ff", fontSize: 32, fontWeight: 700 }}>
+              GA
+            </div>
+          </div>
         </div>
       </div>
     ),
