@@ -41,79 +41,94 @@ export function AmbientScene() {
     const key = new THREE.DirectionalLight(0xffe8d8, 4.2);
     key.position.set(-3, 5, 6);
     scene.add(key);
-    const rim = new THREE.PointLight(0x7189a8, 20, 24);
+    const rim = new THREE.PointLight(0x789fd1, 24, 24);
     rim.position.set(5, -2, 5);
     scene.add(rim);
 
     const materials = [
       new THREE.MeshPhysicalMaterial({
-        color: 0xa6684f,
+        color: 0xdd785f,
         roughness: 0.34,
         metalness: 0.18,
         clearcoat: 0.7,
         clearcoatRoughness: 0.25,
       }),
       new THREE.MeshPhysicalMaterial({
-        color: 0x6e829c,
+        color: 0x7c9ac8,
         roughness: 0.22,
         metalness: 0.52,
         clearcoat: 0.5,
       }),
       new THREE.MeshPhysicalMaterial({
-        color: 0x82927b,
+        color: 0x96b29a,
         roughness: 0.52,
         metalness: 0.06,
         flatShading: true,
       }),
       new THREE.MeshPhysicalMaterial({
-        color: 0xc8b798,
+        color: 0xd7b768,
         roughness: 0.28,
         metalness: 0.24,
         transparent: true,
         opacity: 0.84,
       }),
+      new THREE.MeshPhysicalMaterial({
+        color: 0x9b85c8,
+        roughness: 0.3,
+        metalness: 0.18,
+        clearcoat: 0.55,
+      }),
+      new THREE.MeshPhysicalMaterial({
+        color: 0x6cb7b5,
+        roughness: 0.26,
+        metalness: 0.3,
+        clearcoat: 0.5,
+      }),
     ];
 
     const meshes = [
-      new THREE.Mesh(new THREE.TorusKnotGeometry(0.42, 0.12, 96, 12, 2, 3), materials[0]),
-      new THREE.Mesh(new THREE.SphereGeometry(0.5, 32, 24), materials[1]),
-      new THREE.Mesh(new THREE.IcosahedronGeometry(0.54, 1), materials[2]),
-      new THREE.Mesh(new THREE.BoxGeometry(0.68, 0.68, 0.68, 3, 3, 3), materials[3]),
+      new THREE.Mesh(new THREE.TorusKnotGeometry(0.3, 0.082, 96, 12, 2, 3), materials[0]),
+      new THREE.Mesh(new THREE.SphereGeometry(0.35, 32, 24), materials[1]),
+      new THREE.Mesh(new THREE.IcosahedronGeometry(0.37, 1), materials[2]),
+      new THREE.Mesh(new THREE.BoxGeometry(0.46, 0.46, 0.46, 3, 3, 3), materials[3]),
+      new THREE.Mesh(new THREE.OctahedronGeometry(0.31, 1), materials[4]),
+      new THREE.Mesh(new THREE.TorusGeometry(0.29, 0.075, 16, 72), materials[5]),
     ];
 
     const floaters: FloatingObject[] = meshes.map((mesh, index) => ({
       mesh,
       anchor: new THREE.Vector3(),
-      phase: [0.2, 1.7, 3.4, 5.1][index],
-      speed: [0.00016, 0.00011, 0.00013, 0.00009][index],
-      radiusX: [0.34, 0.46, 0.32, 0.42][index],
-      radiusY: [0.28, 0.22, 0.4, 0.26][index],
+      phase: [0.2, 1.7, 3.4, 5.1, 2.5, 4.35][index],
+      speed: [0.00013, 0.0001, 0.00011, 0.00008, 0.000095, 0.000075][index],
+      radiusX: [0.4, 0.46, 0.36, 0.42, 0.3, 0.35][index],
+      radiusY: [0.3, 0.25, 0.4, 0.28, 0.35, 0.24][index],
     }));
     meshes.forEach((mesh) => scene.add(mesh));
 
     const wireShell = new THREE.LineSegments(
-      new THREE.EdgesGeometry(new THREE.IcosahedronGeometry(0.73, 1)),
+      new THREE.EdgesGeometry(new THREE.IcosahedronGeometry(0.5, 1)),
       new THREE.LineBasicMaterial({ color: 0xbac7d8, transparent: true, opacity: 0.28 }),
     );
     scene.add(wireShell);
 
-    let scrollPosition = window.scrollY;
-    const onScroll = () => { scrollPosition = window.scrollY; };
+    let scrollTarget = window.scrollY;
+    let smoothScroll = scrollTarget;
+    const onScroll = () => { scrollTarget = window.scrollY; };
     window.addEventListener("scroll", onScroll, { passive: true });
 
     const placeObjects = () => {
       const mobile = mount.clientWidth < 720;
       const wide = mount.clientWidth / Math.max(mount.clientHeight, 1);
-      const horizontal = Math.min(5.7, 3.45 * wide);
+      const horizontal = Math.min(4.35, 2.8 * wide);
       const anchors = mobile
-        ? [[1.7, 2.7, -0.5], [-1.75, -2.5, 0.3], [1.9, -0.7, -1], [-1.8, 1.2, -1.4]]
-        : [[horizontal, 2.5, -0.4], [-horizontal * 0.92, -1.3, 0.1], [horizontal * 0.84, -2.8, -1], [-horizontal * 0.78, 2.8, -1.5]];
+        ? [[1.5, 2.5, -0.5], [-1.45, -2.45, 0.3], [1.55, -0.55, -1], [-1.45, 1.05, -1.4], [0.2, -2.9, -1.2], [-0.4, 2.85, -1.5]]
+        : [[horizontal * 0.88, 1.95, -0.8], [horizontal * 0.72, -0.2, -0.35], [horizontal * 0.68, -2.45, -1.2], [-horizontal * 0.72, 2.35, -1.6], [horizontal * 0.12, -2.55, -1.35], [-horizontal * 0.12, 2.5, -1.55]];
       floaters.forEach((floater, index) => {
         floater.anchor.set(anchors[index][0], anchors[index][1], anchors[index][2]);
-        floater.mesh.visible = !mobile || index < 3;
+        floater.mesh.visible = !mobile || index < 4;
       });
       wireShell.visible = !mobile;
-      wireShell.position.set(horizontal * 0.84, -2.8, -1.02);
+      wireShell.position.set(horizontal * 0.68, -2.45, -1.22);
     };
 
     const resize = () => {
@@ -132,7 +147,8 @@ export function AmbientScene() {
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     let frame = 0;
     const animate = (time: number) => {
-      const scrollDrift = scrollPosition * 0.00032;
+      smoothScroll += (scrollTarget - smoothScroll) * 0.035;
+      const scrollDrift = smoothScroll * 0.00022;
       floaters.forEach((floater, index) => {
         const angle = time * floater.speed + floater.phase + scrollDrift * (index % 2 ? -1 : 1);
         floater.mesh.position.x = floater.anchor.x + Math.cos(angle) * floater.radiusX;

@@ -51,6 +51,43 @@ function ExternalArrow({ size = 18 }: { size?: number }) {
   return <ArrowUpRight aria-hidden="true" size={size} strokeWidth={1.7} />;
 }
 
+function ProjectArtwork({ kind }: { kind: string }) {
+  return (
+    <div className={`project-artwork artwork-${kind}`} aria-hidden="true">
+      <svg viewBox="0 0 320 180" role="presentation" focusable="false">
+        <path className="art-grid" d="M0 36H320M0 72H320M0 108H320M0 144H320M64 0V180M128 0V180M192 0V180M256 0V180" />
+        {kind === "copper" && (
+          <>
+            <path className="art-primary" d="M18 142C58 139 72 106 104 112C138 119 152 50 190 67C219 80 240 34 302 45" />
+            <path className="art-secondary" d="M18 126C57 110 87 143 124 98C159 55 191 119 222 80C254 40 278 81 302 58" />
+            <circle cx="190" cy="67" r="7" /><circle cx="240" cy="44" r="4" />
+          </>
+        )}
+        {kind === "steel" && (
+          <>
+            <path className="art-primary" d="M10 105C35 45 61 153 88 89C116 22 144 158 172 91C200 27 228 148 256 82C275 38 292 74 310 48" />
+            <rect x="36" y="118" width="22" height="33" /><rect x="91" y="99" width="22" height="52" /><rect x="146" y="72" width="22" height="79" /><rect x="201" y="92" width="22" height="59" /><rect x="256" y="51" width="22" height="100" />
+          </>
+        )}
+        {kind === "sage" && (
+          <>
+            <path className="art-secondary" d="M38 92L95 47L158 92L222 43L282 104M95 47L95 134L158 92L222 133L282 104M95 134L38 92" />
+            <circle cx="38" cy="92" r="8" /><circle cx="95" cy="47" r="8" /><circle cx="95" cy="134" r="8" /><circle cx="158" cy="92" r="11" /><circle cx="222" cy="43" r="8" /><circle cx="222" cy="133" r="8" /><circle cx="282" cy="104" r="8" />
+          </>
+        )}
+        {kind === "sand" && (
+          <>
+            <path className="art-primary" d="M23 145C61 139 74 117 108 122C145 127 157 86 190 91C227 97 244 48 300 40" />
+            <path className="art-fill" d="M23 145C61 139 74 117 108 122C145 127 157 86 190 91C227 97 244 48 300 40V164H23Z" />
+            <line x1="190" y1="24" x2="190" y2="164" /><text x="200" y="43">67%</text>
+          </>
+        )}
+      </svg>
+      <span>System study / {kind}</span>
+    </div>
+  );
+}
+
 export function PersonalSite() {
   useEffect(() => {
     const targets = Array.from(
@@ -158,7 +195,15 @@ export function PersonalSite() {
               </div>
               <div className="project-identity">
                 <span>{project.label}</span>
-                <h3>{project.name}</h3>
+                <div className="project-title-line">
+                  <h3>{project.name}</h3>
+                  <a href="https://4nace.com" target="_blank" rel="noreferrer" className="project-affiliation">
+                    <small>Built with</small>
+                    <strong>4NACE</strong>
+                    <ExternalArrow size={13} />
+                  </a>
+                </div>
+                <ProjectArtwork kind={project.tone} />
               </div>
               <div className="project-detail">
                 <blockquote>{project.question}</blockquote>
@@ -179,7 +224,7 @@ export function PersonalSite() {
         </div>
         <div className="now-statement">
           <div>
-            <span className="now-status"><i /> Live transmission</span>
+            <span className="now-status"><i /> Current portfolio</span>
             <h2>4NACE</h2>
           </div>
           <p>
@@ -200,8 +245,8 @@ export function PersonalSite() {
             <p>Find the weak assumption. Build the smallest useful proof. Keep the evidence attached.</p>
           </article>
           <article className="now-detail">
-            <span>Current obsession</span>
-            <p>Turning ambitious ideas into systems that survive contact with reality.</p>
+            <span>Research direction</span>
+            <p>Turning ambitious ideas into measurable systems that can be evaluated and improved.</p>
           </article>
         </div>
       </section>
@@ -209,7 +254,7 @@ export function PersonalSite() {
       <section className="operator-section" id="about">
         <div className="operator-head">
           <span className="section-label">03 / About</span>
-          <h2>Curious by default.<span>Sceptical on purpose.</span></h2>
+          <h2>Builder, researcher, operator.<span>Working across uncertain systems.</span></h2>
         </div>
 
         <div className="operator-grid">
@@ -226,8 +271,8 @@ export function PersonalSite() {
           </div>
           <dl className="operator-facts">
             <div><dt>Base</dt><dd>Genoa ↔ Milan, Italy</dd></div>
-            <div><dt>Mode</dt><dd>Ask → build → test → repeat</dd></div>
-            <div><dt>Bias</dt><dd>Evidence over theatre</dd></div>
+            <div><dt>Role</dt><dd>Founder and software builder</dd></div>
+            <div><dt>Focus</dt><dd>Decision systems under uncertainty</dd></div>
             <div><dt>Languages</dt><dd>Italian, English, Python, TypeScript</dd></div>
           </dl>
         </div>
@@ -244,9 +289,9 @@ export function PersonalSite() {
           <span>04 / Contact</span>
           <span>Good questions are always welcome.</span>
         </div>
-        <p>Have a strange, difficult, or useful problem?</p>
+        <p>For collaborations, product conversations, or difficult technical problems.</p>
         <a className="contact-email" href="mailto:gabriele.armento@gmail.com">
-          Send a signal<ArrowUpRight aria-hidden="true" />
+          Get in touch<ArrowUpRight aria-hidden="true" />
         </a>
         <div className="contact-footer">
           <p>Email is best. Context is appreciated.<br />Coffee may improve response quality.</p>

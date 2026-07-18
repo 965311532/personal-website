@@ -29,7 +29,7 @@ export default function OpenGraphImage() {
 
         <div style={{ display: "flex", flexDirection: "column", fontSize: 102, fontWeight: 600, lineHeight: 0.9, letterSpacing: -7 }}>
           <span>Ideas are cheap.</span>
-          <span style={{ marginTop: 16, color: "#c8c4bb", fontFamily: "Georgia, serif", fontStyle: "italic", fontWeight: 400, letterSpacing: -4 }}>
+          <span style={{ marginTop: 16, color: "#d2cec5", fontFamily: "Didot, Bodoni MT, Times New Roman, serif", fontWeight: 400, letterSpacing: -4 }}>
             Evidence is the work.
           </span>
         </div>
@@ -39,9 +39,9 @@ export default function OpenGraphImage() {
           <span>Make the reasoning visible</span>
         </div>
 
-        <div style={{ position: "absolute", top: -40, right: 90, width: 155, height: 155, display: "flex", borderRadius: 999, background: "#a6684f", opacity: 0.7, boxShadow: "inset -30px -24px 45px rgba(0,0,0,.38)" }} />
-        <div style={{ position: "absolute", right: -45, bottom: 88, width: 125, height: 125, display: "flex", borderRadius: 999, background: "#6e829c", opacity: 0.65, boxShadow: "inset -25px -20px 38px rgba(0,0,0,.4)" }} />
-        <div style={{ position: "absolute", bottom: -58, left: 175, width: 112, height: 112, display: "flex", transform: "rotate(24deg)", background: "#82927b", opacity: 0.62, boxShadow: "inset -22px -18px 35px rgba(0,0,0,.38)" }} />
+        <div style={{ position: "absolute", top: -40, right: 90, width: 155, height: 155, display: "flex", borderRadius: 999, background: "#dd785f", opacity: 0.75, boxShadow: "inset -30px -24px 45px rgba(0,0,0,.38)" }} />
+        <div style={{ position: "absolute", right: -45, bottom: 88, width: 125, height: 125, display: "flex", borderRadius: 999, background: "#7c9ac8", opacity: 0.7, boxShadow: "inset -25px -20px 38px rgba(0,0,0,.4)" }} />
+        <div style={{ position: "absolute", bottom: -58, left: 175, width: 112, height: 112, display: "flex", transform: "rotate(24deg)", background: "#96b29a", opacity: 0.68, boxShadow: "inset -22px -18px 35px rgba(0,0,0,.38)" }} />
       </div>
     ),
     size,
