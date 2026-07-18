@@ -63,7 +63,6 @@ export function PersonalSite() {
           ".now-detail",
           ".operator-head > *",
           ".operator-bio p",
-          ".operator-facts > div",
           ".operator-quote",
           ".contact-section > *",
           ".site-footer > *",
@@ -101,7 +100,7 @@ export function PersonalSite() {
 
       <header className="signal-nav">
         <a className="signal-wordmark" href="#top" aria-label="Gabriele Armento, home">
-          Gabriele Armento
+          GABRIELE ARMENTO
         </a>
         <nav aria-label="Primary navigation">
           <a href="#work">Work</a>
@@ -209,27 +208,13 @@ export function PersonalSite() {
       <section className="operator-section" id="about">
         <div className="operator-head">
           <span className="section-label">03 / About</span>
-          <h2>Curious by default.<span>Sceptical on purpose.</span></h2>
+          <h2>Curious by default.</h2>
         </div>
 
         <div className="operator-grid">
           <div className="operator-bio">
-            <p>
-              I’m a self-taught software builder from Italy with a long-running
-              interest in automation, finance, entrepreneurship, and the machinery
-              behind good decisions.
-            </p>
-            <p>
-              The technology changes. The instinct doesn’t: understand the
-              structure, find the weak assumption, and make something real enough to test.
-            </p>
+            <p>I’m a self-taught software builder from Italy.</p>
           </div>
-          <dl className="operator-facts">
-            <div><dt>Base</dt><dd>Genoa ↔ Milan, Italy</dd></div>
-            <div><dt>Role</dt><dd>Founder and software builder</dd></div>
-            <div><dt>Focus</dt><dd>Decision systems under uncertainty</dd></div>
-            <div><dt>Languages</dt><dd>Italian, English, Python, TypeScript</dd></div>
-          </dl>
         </div>
 
         <aside className="operator-quote">
