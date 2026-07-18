@@ -37,40 +37,49 @@ export function AmbientScene() {
     renderer.domElement.setAttribute("aria-hidden", "true");
     mount.appendChild(renderer.domElement);
 
-    scene.add(new THREE.HemisphereLight(0xe7edf7, 0x171b20, 2.2));
-    const key = new THREE.DirectionalLight(0xffe8d8, 4.2);
+    scene.add(new THREE.HemisphereLight(0xeef4ff, 0x10131a, 2.7));
+    const key = new THREE.DirectionalLight(0xffd8c7, 5.1);
     key.position.set(-3, 5, 6);
     scene.add(key);
-    const rim = new THREE.PointLight(0x7892b4, 22, 24);
+    const rim = new THREE.PointLight(0x4f8dff, 30, 26);
     rim.position.set(5, -2, 5);
     scene.add(rim);
 
+    const accent = new THREE.PointLight(0xff5f78, 18, 20);
+    accent.position.set(-5, 0, 3);
+    scene.add(accent);
+
     const materials = [
       new THREE.MeshPhysicalMaterial({
-        color: 0xc06c52,
-        roughness: 0.34,
-        metalness: 0.18,
-        clearcoat: 0.7,
-        clearcoatRoughness: 0.25,
+        color: 0xff725e,
+        emissive: 0x2b0906,
+        roughness: 0.25,
+        metalness: 0.14,
+        clearcoat: 0.92,
+        clearcoatRoughness: 0.16,
       }),
       new THREE.MeshPhysicalMaterial({
-        color: 0x7892b4,
-        roughness: 0.22,
-        metalness: 0.52,
-        clearcoat: 0.5,
+        color: 0x4c8dff,
+        emissive: 0x061631,
+        roughness: 0.16,
+        metalness: 0.62,
+        clearcoat: 0.72,
       }),
       new THREE.MeshPhysicalMaterial({
-        color: 0x8da287,
-        roughness: 0.52,
+        color: 0xa5dc67,
+        emissive: 0x102008,
+        roughness: 0.42,
         metalness: 0.06,
         flatShading: true,
       }),
       new THREE.MeshPhysicalMaterial({
-        color: 0xd0bd95,
-        roughness: 0.28,
-        metalness: 0.24,
+        color: 0xffc857,
+        emissive: 0x261603,
+        roughness: 0.2,
+        metalness: 0.32,
+        clearcoat: 0.7,
         transparent: true,
-        opacity: 0.84,
+        opacity: 0.94,
       }),
     ];
 
@@ -93,7 +102,7 @@ export function AmbientScene() {
 
     const wireShell = new THREE.LineSegments(
       new THREE.EdgesGeometry(new THREE.IcosahedronGeometry(0.73, 1)),
-      new THREE.LineBasicMaterial({ color: 0xbac7d8, transparent: true, opacity: 0.28 }),
+      new THREE.LineBasicMaterial({ color: 0x72d9ff, transparent: true, opacity: 0.42 }),
     );
     scene.add(wireShell);
 

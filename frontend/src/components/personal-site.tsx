@@ -63,7 +63,6 @@ export function PersonalSite() {
           ".now-detail",
           ".operator-head > *",
           ".operator-bio p",
-          ".operator-quote",
           ".contact-section > *",
           ".site-footer > *",
         ].join(","),
@@ -213,15 +212,14 @@ export function PersonalSite() {
 
         <div className="operator-grid">
           <div className="operator-bio">
-            <p>I’m a self-taught software builder from Italy.</p>
+            <p>
+              I’m a self-taught software builder from Italy. I’m most at home
+              turning ambiguous questions into working products—learning the
+              domain, building the system, and testing whether the idea holds up
+              in practice.
+            </p>
           </div>
         </div>
-
-        <aside className="operator-quote">
-          <span>Unofficial job title № 17</span>
-          <blockquote>“The metaphorical wall my friends throw ideas at to see if they stick.”</blockquote>
-          <p>High impact tolerance. No warranty on weak assumptions.</p>
-        </aside>
       </section>
 
       <section className="contact-section" id="contact">

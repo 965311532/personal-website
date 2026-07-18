@@ -245,13 +245,8 @@ body {
 .operator-head { display: grid; grid-template-columns: 0.48fr 1.52fr; gap: 5vw; }
 .operator-head h2 { max-width: 13ch; margin: 0; font-size: clamp(3.8rem, 7vw, 8.2rem); font-weight: 650; letter-spacing: -0.064em; line-height: 0.94; }
 .operator-grid { margin: clamp(75px, 9vw, 120px) 0 0 24%; }
-.operator-bio { max-width: 34ch; font-size: clamp(1.35rem, 2.35vw, 2.5rem); font-weight: 430; letter-spacing: -0.028em; line-height: 1.38; }
+.operator-bio { max-width: 48ch; font-size: clamp(1.35rem, 2.35vw, 2.5rem); font-weight: 430; letter-spacing: -0.028em; line-height: 1.38; }
 .operator-bio p { margin: 0; }
-
-.operator-quote { max-width: 880px; margin: clamp(100px, 12vw, 170px) 0 0 auto; padding: clamp(40px, 5vw, 68px); border: 1px solid var(--line-strong); background: rgb(200 183 152 / 9%); }
-.operator-quote > span { color: var(--sand); font-family: var(--font-mono); font-size: 0.55rem; letter-spacing: 0.06em; text-transform: uppercase; }
-.operator-quote blockquote { margin: 46px 0 27px; color: var(--bone); font-family: var(--font-editorial); font-size: clamp(2rem, 3.7vw, 4.4rem); font-weight: 400; letter-spacing: -0.034em; line-height: 1.08; }
-.operator-quote p { margin: 0; color: var(--muted); font-family: var(--font-mono); font-size: 0.54rem; letter-spacing: 0.04em; text-transform: uppercase; }
 
 .contact-section { min-height: 78vh; padding: 42px 3.5vw 52px; background: rgb(15 24 32 / 76%); }
 .contact-topline { display: flex; justify-content: space-between; padding-bottom: 19px; border-bottom: 1px solid var(--line); color: var(--muted); font-family: var(--font-mono); font-size: 0.56rem; letter-spacing: 0.06em; text-transform: uppercase; }
@@ -338,8 +333,6 @@ body {
   .operator-head h2 { margin-top: 58px; font-size: clamp(3.5rem, 15vw, 5rem); }
   .operator-grid { margin: 70px 0 0; }
   .operator-bio { font-size: 1.16rem; }
-  .operator-quote { margin-top: 92px; padding: 30px 24px; }
-  .operator-quote blockquote { margin-top: 40px; font-size: 2.2rem; }
   .contact-section { min-height: 72svh; padding: 30px 20px 40px; }
   .contact-topline { font-size: 0.48rem; }
   .contact-section > p { margin-top: 85px; }
