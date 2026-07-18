@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   ArrowDown,
   ArrowUpRight,
@@ -72,8 +72,56 @@ function ExternalArrow() {
 export function PersonalSite() {
   const [troutTaps, setTroutTaps] = useState(0);
 
+  useEffect(() => {
+    const revealTargets = Array.from(
+      document.querySelectorAll<HTMLElement>(
+        [
+          ".section-heading",
+          ".nace-card",
+          ".note-block",
+          ".project-row",
+          ".archive-head",
+          ".archive-list a",
+          ".trout-copy > *",
+          ".trout-stage",
+          ".about-lead",
+          ".about-story p",
+          ".about-facts > div",
+          ".wall-note",
+          ".contact-section > *",
+          ".site-footer > *",
+        ].join(","),
+      ),
+    );
+
+    revealTargets.forEach((element, index) => {
+      element.dataset.vibeReveal = "";
+      element.style.setProperty("--vibe-stagger", `${(index % 3) * 70}ms`);
+    });
+
+    document.documentElement.classList.add("vibe-motion-ready");
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add("is-vibe-visible");
+          observer.unobserve(entry.target);
+        });
+      },
+      { threshold: 0.14, rootMargin: "-40px 0px" },
+    );
+
+    revealTargets.forEach((element) => observer.observe(element));
+
+    return () => {
+      observer.disconnect();
+      document.documentElement.classList.remove("vibe-motion-ready");
+    };
+  }, []);
+
   return (
-    <main className="site-shell">
+    <main className="site-shell vibe-site">
       <header className="topbar">
         <a className="wordmark" href="#top" aria-label="Gabriele Armento, home">
           <span>GA</span>
