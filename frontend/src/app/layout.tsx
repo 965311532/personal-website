@@ -16,24 +16,24 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL("https://gabrielearmento.com"),
   title: {
-    default: "Gabriele Armento — Builder of systems",
+    default: "Gabriele Armento — Builder for uncertain worlds",
     template: "%s — Gabriele Armento",
   },
   description:
     "Gabriele Armento is an Italian founder and software builder working across research, data, markets, and AI-native products.",
   openGraph: {
-    title: "Gabriele Armento — Builder of systems",
+    title: "Gabriele Armento — Builder for uncertain worlds",
     description:
-      "I build systems for uncertain worlds: research, data, markets, and AI-native products.",
+      "I make ambiguity operational across research, data, markets, and AI-native products.",
     url: "https://gabrielearmento.com",
     siteName: "Gabriele Armento",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Gabriele Armento — Builder of systems",
+    title: "Gabriele Armento — Builder for uncertain worlds",
     description:
-      "I build systems for uncertain worlds: research, data, markets, and AI-native products.",
+      "I make ambiguity operational across research, data, markets, and AI-native products.",
   },
   alternates: {
     canonical: "https://gabrielearmento.com",

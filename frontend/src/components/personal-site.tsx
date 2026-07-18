@@ -15,16 +15,20 @@ const currentProjects = [
     name: "Cube",
     type: "Quantitative research system",
     description:
-      "An evidence chain for market research, backtesting, execution, and monitoring—built to make every result inspectable.",
+      "An evidence chain for market research, backtesting, execution, and monitoring, built to make every result inspectable.",
     tags: ["Research", "Markets", "Automation"],
+    signal: "Evidence before conviction",
+    visual: "cube",
   },
   {
     number: "02",
     name: "Energy",
     type: "European power markets",
     description:
-      "Applying rigorous data and decision systems to power markets, where timing, physical reality, and uncertainty all matter.",
+      "Rigorous data and decision systems for a market where timing, physical reality, and uncertainty all matter.",
     tags: ["Energy", "Decision systems", "In progress"],
+    signal: "Price meets physics",
+    visual: "energy",
   },
   {
     number: "03",
@@ -33,6 +37,8 @@ const currentProjects = [
     description:
       "Infrastructure for knowing what data exists, where it came from, when it was known, and whether it is healthy enough to use.",
     tags: ["Data", "Lineage", "Infrastructure"],
+    signal: "Know what you know",
+    visual: "wayfinder",
   },
   {
     number: "04",
@@ -41,6 +47,8 @@ const currentProjects = [
     description:
       "A workbench for turning resolvable questions into explicit probabilities, causal assumptions, and honest revisions.",
     tags: ["Forecasting", "Evidence", "Research"],
+    signal: "Beliefs with receipts",
+    visual: "forecast",
   },
 ];
 
@@ -69,6 +77,24 @@ function ExternalArrow() {
   return <ArrowUpRight aria-hidden="true" size={18} strokeWidth={1.8} />;
 }
 
+function ProjectVisual({ kind, name }: { kind: string; name: string }) {
+  return (
+    <div className={`project-visual project-visual-${kind}`} aria-hidden="true">
+      <span className="visual-label">{name} / live system</span>
+      <div className="visual-canvas">
+        <i className="visual-line visual-line-one" />
+        <i className="visual-line visual-line-two" />
+        <i className="visual-line visual-line-three" />
+        <i className="visual-node visual-node-one" />
+        <i className="visual-node visual-node-two" />
+        <i className="visual-node visual-node-three" />
+        <strong>{kind === "forecast" ? "67%" : name.slice(0, 2).toUpperCase()}</strong>
+      </div>
+      <span className="visual-status">signal / verified</span>
+    </div>
+  );
+}
+
 export function PersonalSite() {
   const [troutTaps, setTroutTaps] = useState(0);
 
@@ -76,15 +102,16 @@ export function PersonalSite() {
     const revealTargets = Array.from(
       document.querySelectorAll<HTMLElement>(
         [
-          ".section-heading",
-          ".nace-card",
-          ".note-block",
-          ".project-row",
-          ".archive-head",
+          ".manifesto-copy > *",
+          ".now-card",
+          ".now-note",
+          ".work-intro > *",
+          ".project-billboard > *",
+          ".archive-title > *",
           ".archive-list a",
           ".trout-copy > *",
           ".trout-stage",
-          ".about-lead",
+          ".about-statement > *",
           ".about-story p",
           ".about-facts > div",
           ".wall-note",
@@ -95,33 +122,33 @@ export function PersonalSite() {
     );
 
     revealTargets.forEach((element, index) => {
-      element.dataset.vibeReveal = "";
-      element.style.setProperty("--vibe-stagger", `${(index % 3) * 70}ms`);
+      element.dataset.punchReveal = "";
+      element.style.setProperty("--punch-stagger", `${(index % 4) * 65}ms`);
     });
 
-    document.documentElement.classList.add("vibe-motion-ready");
+    document.documentElement.classList.add("punch-motion-ready");
 
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (!entry.isIntersecting) return;
-          entry.target.classList.add("is-vibe-visible");
+          entry.target.classList.add("is-punch-visible");
           observer.unobserve(entry.target);
         });
       },
-      { threshold: 0.14, rootMargin: "-40px 0px" },
+      { threshold: 0.12, rootMargin: "-36px 0px" },
     );
 
     revealTargets.forEach((element) => observer.observe(element));
 
     return () => {
       observer.disconnect();
-      document.documentElement.classList.remove("vibe-motion-ready");
+      document.documentElement.classList.remove("punch-motion-ready");
     };
   }, []);
 
   return (
-    <main className="site-shell vibe-site">
+    <main className="site-shell vibe-site punch-site">
       <header className="topbar">
         <a className="wordmark" href="#top" aria-label="Gabriele Armento, home">
           <span>GA</span>
@@ -137,147 +164,134 @@ export function PersonalSite() {
 
         <a className="availability" href="mailto:gabriele.armento@gmail.com">
           <span aria-hidden="true" />
-          Open to good questions
+          Available for good questions
         </a>
       </header>
 
-      <section className="hero" id="top">
-        <div className="hero-kicker reveal reveal-one">
-          <span>Gabriele Armento</span>
-          <span>Independent builder · Italy</span>
+      <section className="punch-hero" id="top">
+        <div className="hero-meta hero-meta-top">
+          <span>Independent builder</span>
+          <span>Italy / 44° N</span>
         </div>
 
-        <h1 className="hero-title reveal reveal-two">
-          I build systems
-          <span>for uncertain worlds.</span>
-        </h1>
-
-        <div className="hero-lower reveal reveal-three">
-          <div className="hero-intro">
-            <p>
-              Founder, software builder, and professional question-asker working
-              where <strong>research</strong>, <strong>data</strong>, and
-              <strong> decisions</strong> meet.
-            </p>
-            <a className="text-link" href="#now">
-              See what I’m building <ArrowDown aria-hidden="true" size={17} />
-            </a>
-          </div>
-
-          <div className="systems-map" aria-label="A map of Gabriele's working process">
-            <span className="map-axis map-axis-x" aria-hidden="true" />
-            <span className="map-axis map-axis-y" aria-hidden="true" />
-            <span className="map-ring map-ring-one" aria-hidden="true" />
-            <span className="map-ring map-ring-two" aria-hidden="true" />
-            <span className="map-label map-label-one">Ask</span>
-            <span className="map-label map-label-two">Build</span>
-            <span className="map-label map-label-three">Test</span>
-            <span className="map-label map-label-four">Learn</span>
-            <span className="map-core">GA</span>
-            <span className="map-orbit-dot" aria-hidden="true" />
-          </div>
+        <div className="hero-name" aria-label="Gabriele Armento">
+          <span className="hero-name-first">Gabriele</span>
+          <span className="hero-name-last">Armento</span>
         </div>
 
-        <div className="hero-index" aria-hidden="true">
-          <span>44° N</span>
-          <span>009° E</span>
-          <span>EST. 2000</span>
-        </div>
-      </section>
-
-      <div className="ticker" aria-hidden="true">
-        <div className="ticker-track">
-          <span>Product</span><i>✦</i><span>Research</span><i>✦</i>
-          <span>Data</span><i>✦</i><span>Automation</span><i>✦</i>
-          <span>Product</span><i>✦</i><span>Research</span><i>✦</i>
-          <span>Data</span><i>✦</i><span>Automation</span><i>✦</i>
-        </div>
-      </div>
-
-      <section className="section now-section" id="now">
-        <div className="section-rail">
-          <span>01 / Now</span>
-          <p>Current coordinates</p>
+        <div className="hero-orbit" aria-label="Ask, build, test, learn">
+          <span className="orbit-word orbit-ask">Ask</span>
+          <span className="orbit-word orbit-build">Build</span>
+          <span className="orbit-word orbit-test">Test</span>
+          <span className="orbit-word orbit-learn">Learn</span>
+          <span className="orbit-ring orbit-ring-one" aria-hidden="true" />
+          <span className="orbit-ring orbit-ring-two" aria-hidden="true" />
+          <span className="orbit-core">GA</span>
         </div>
 
-        <div className="section-content">
-          <div className="section-heading">
-            <p className="eyebrow">The current chapter</p>
-            <h2>A small studio for hard problems.</h2>
-          </div>
-
-          <div className="now-grid">
-            <article className="nace-card">
-              <div className="nace-card-top">
-                <span className="card-status"><i /> Building now</span>
-                <span className="card-year">2026</span>
-              </div>
-              <div className="nace-mark">4NACE<span>↗</span></div>
-              <p>
-                The shared home for a portfolio of AI-applied products. Different
-                problems, one operating belief: shorten the distance between a
-                half-formed idea and a verified outcome.
-              </p>
-              <a href="https://4nace.com" target="_blank" rel="noreferrer">
-                Visit 4nace.com <ExternalArrow />
-              </a>
-            </article>
-
-            <div className="now-notes">
-              <div className="note-block">
-                <span>Working across</span>
-                <p>Markets, energy, data infrastructure, forecasting, and AI-native workflows.</p>
-              </div>
-              <div className="note-block">
-                <span>How I work</span>
-                <p>Start with the real system. Make assumptions visible. Build the smallest useful proof.</p>
-              </div>
-              <div className="note-block note-block-blue">
-                <span>Current obsession</span>
-                <p>Giving ambitious ideas an evidence trail.</p>
-              </div>
-            </div>
+        <div className="hero-bottom">
+          <p>
+            I turn ambitious, uncertain ideas into systems that can be tested,
+            inspected, and improved.
+          </p>
+          <a href="#work" className="hero-cta">
+            Enter the work <ArrowDown aria-hidden="true" size={18} />
+          </a>
+          <div className="hero-fields" aria-hidden="true">
+            <span>Research</span>
+            <span>Data</span>
+            <span>Markets</span>
+            <span>AI</span>
           </div>
         </div>
       </section>
 
-      <section className="section work-section" id="work">
-        <div className="section-rail">
-          <span>02 / Work</span>
-          <p>Selected systems</p>
+      <section className="manifesto-section" id="now">
+        <div className="manifesto-index">
+          <span>01</span>
+          <p>Right now</p>
+        </div>
+        <div className="manifesto-copy">
+          <p className="eyebrow">The current chapter</p>
+          <h1>
+            I make ambiguity
+            <span>operational.</span>
+          </h1>
+          <p className="manifesto-aside">
+            Not by making uncertainty disappear. By making assumptions visible,
+            decisions traceable, and the next move obvious.
+          </p>
         </div>
 
-        <div className="section-content">
-          <div className="section-heading heading-row">
-            <div>
-              <p className="eyebrow">Active portfolio</p>
-              <h2>Things I’m trying to make true.</h2>
-            </div>
-            <p className="heading-aside">
-              Not a trophy shelf. These are living systems—each one a way of
-              asking better questions at a different layer.
-            </p>
+        <div className="now-card">
+          <div className="now-card-head">
+            <span><i /> Building now</span>
+            <span>2026</span>
           </div>
+          <div className="now-card-title">4NACE<sup>↗</sup></div>
+          <p>
+            A portfolio studio for AI-applied products. Different markets, one
+            operating belief: shorten the distance between an idea and a
+            verified outcome.
+          </p>
+          <a href="https://4nace.com" target="_blank" rel="noreferrer">
+            Visit 4nace.com <ExternalArrow />
+          </a>
+        </div>
 
-          <div className="project-list">
-            {currentProjects.map((project) => (
-              <article className="project-row" key={project.name}>
-                <span className="project-number">{project.number}</span>
-                <div className="project-name">
-                  <h3>{project.name}</h3>
+        <div className="now-notes">
+          <div className="now-note">
+            <span>Working across</span>
+            <p>Markets, energy, data infrastructure, forecasting, AI-native workflows.</p>
+          </div>
+          <div className="now-note">
+            <span>Operating method</span>
+            <p>Start with the real system. Find the weak assumption. Build the smallest useful proof.</p>
+          </div>
+          <div className="now-note now-note-accent">
+            <span>Current obsession</span>
+            <p>Giving ambitious ideas an evidence trail.</p>
+          </div>
+        </div>
+      </section>
+
+      <section className="work-section" id="work">
+        <div className="work-intro">
+          <div>
+            <span>02 / Selected systems</span>
+            <span>Four live questions</span>
+          </div>
+          <h2>Work that earns its confidence.</h2>
+          <p>
+            These are not finished trophies. They are active systems, each one
+            designed to make a different kind of uncertainty more tractable.
+          </p>
+        </div>
+
+        <div className="project-gallery">
+          {currentProjects.map((project) => (
+            <article className={`project-billboard project-${project.visual}`} key={project.name}>
+              <div className="project-copy">
+                <div className="project-kicker">
+                  <span>{project.number}</span>
                   <span>{project.type}</span>
                 </div>
+                <h3>{project.name}</h3>
                 <p>{project.description}</p>
                 <div className="project-tags">
                   {project.tags.map((tag) => <span key={tag}>{tag}</span>)}
                 </div>
-              </article>
-            ))}
-          </div>
+                <strong className="project-signal">{project.signal}</strong>
+              </div>
+              <ProjectVisual kind={project.visual} name={project.name} />
+            </article>
+          ))}
+        </div>
 
-          <div className="archive-head">
+        <div className="archive-wrap">
+          <div className="archive-title">
             <p className="eyebrow">Earlier experiments</p>
-            <span>Useful detours & questionable ideas</span>
+            <h2>Useful detours.</h2>
           </div>
           <div className="archive-list">
             {archiveProjects.map((project) => (
@@ -294,11 +308,11 @@ export function PersonalSite() {
 
       <section className="fun-section" aria-labelledby="trout-title">
         <div className="trout-copy">
-          <p className="eyebrow">A necessary break in seriousness</p>
+          <p className="eyebrow">A strategically vital intermission</p>
           <h2 id="trout-title">Tap the trout.</h2>
           <p>
-            Years ago, a friend and I built a website where the whole product
-            was clicking a fish. Its strategy remains refreshingly legible.
+            A friend and I once built a product where the whole strategy was
+            clicking a fish. Its roadmap remains refreshingly legible.
           </p>
           <a href="https://tapthetrout.com" target="_blank" rel="noreferrer">
             Visit the original <ExternalArrow />
@@ -324,52 +338,44 @@ export function PersonalSite() {
         </div>
       </section>
 
-      <section className="section about-section" id="about">
-        <div className="section-rail">
-          <span>03 / About</span>
-          <p>The operator</p>
+      <section className="about-section" id="about">
+        <div className="about-statement">
+          <p className="eyebrow">03 / The operator</p>
+          <h2>
+            Curious by default.
+            <span>Sceptical on purpose.</span>
+          </h2>
         </div>
 
-        <div className="section-content">
-          <div className="about-lead">
-            <p className="eyebrow">Ciao, I’m Gabriele</p>
-            <h2>
-              Curious by default.<br />
-              <em>Sceptical on purpose.</em>
-            </h2>
+        <div className="about-body">
+          <div className="about-story">
+            <p>
+              I’m a self-taught software builder from Italy with a long-running
+              interest in automation, finance, entrepreneurship, and the
+              machinery behind good decisions.
+            </p>
+            <p>
+              The technology changes; the instinct doesn’t: understand the
+              structure, find the weak assumption, and make something real
+              enough to test.
+            </p>
           </div>
 
-          <div className="about-grid">
-            <div className="about-story">
-              <p>
-                I’m a self-taught software builder from Italy with a long-running
-                interest in automation, finance, entrepreneurship, and the
-                machinery behind good decisions.
-              </p>
-              <p>
-                I moved from making web products quickly to building systems that
-                have to remain honest under pressure. The technology changes; the
-                instinct doesn’t: understand the structure, find the weak
-                assumption, and make something real enough to test.
-              </p>
-            </div>
-
-            <dl className="about-facts">
-              <div><dt>Based</dt><dd>Genoa ↔ Milan, Italy</dd></div>
-              <div><dt>Working mode</dt><dd>Ask → build → test → repeat</dd></div>
-              <div><dt>Bias</dt><dd>Evidence over theatre</dd></div>
-              <div><dt>Languages</dt><dd>Italian, English, Python, TypeScript</dd></div>
-            </dl>
-          </div>
-
-          <aside className="wall-note">
-            <span>Unofficial job title № 17</span>
-            <blockquote>
-              “The metaphorical wall my friends throw ideas at to see if they stick.”
-            </blockquote>
-            <p>High impact tolerance. No warranty on weak assumptions.</p>
-          </aside>
+          <dl className="about-facts">
+            <div><dt>Based</dt><dd>Genoa ↔ Milan, Italy</dd></div>
+            <div><dt>Working mode</dt><dd>Ask → build → test → repeat</dd></div>
+            <div><dt>Bias</dt><dd>Evidence over theatre</dd></div>
+            <div><dt>Languages</dt><dd>Italian, English, Python, TypeScript</dd></div>
+          </dl>
         </div>
+
+        <aside className="wall-note">
+          <span>Unofficial job title № 17</span>
+          <blockquote>
+            “The metaphorical wall my friends throw ideas at to see if they stick.”
+          </blockquote>
+          <p>High impact tolerance. No warranty on weak assumptions.</p>
+        </aside>
       </section>
 
       <section className="contact-section" id="contact">
