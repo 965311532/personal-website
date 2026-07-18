@@ -64,7 +64,6 @@ export function PersonalSite() {
           ".operator-head > *",
           ".operator-bio p",
           ".contact-section > *",
-          ".site-footer > *",
         ].join(","),
       ),
     );
@@ -229,10 +228,10 @@ export function PersonalSite() {
         </div>
         <p>For collaborations, product conversations, or difficult technical problems.</p>
         <a className="contact-email" href="mailto:gabriele.armento@gmail.com">
-          Get in touch<ArrowUpRight aria-hidden="true" />
+          <span>Get in touch</span><ArrowUpRight aria-hidden="true" />
         </a>
         <div className="contact-footer">
-          <p>Email is best. Context is appreciated.<br />Coffee may improve response quality.</p>
+          <p>Email is best. Context is appreciated.</p>
           <div className="social-links">
             <a href="mailto:gabriele.armento@gmail.com"><Mail aria-hidden="true" /> Email</a>
             <a href="https://www.linkedin.com/in/gabrielearmento/" target="_blank" rel="noreferrer"><Linkedin aria-hidden="true" /> LinkedIn</a>
