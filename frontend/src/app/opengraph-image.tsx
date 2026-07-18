@@ -9,65 +9,39 @@ export default function OpenGraphImage() {
     (
       <div
         style={{
+          position: "relative",
           width: "100%",
           height: "100%",
           display: "flex",
-          color: "#151617",
-          background: "#f4f1e9",
+          flexDirection: "column",
+          justifyContent: "space-between",
+          overflow: "hidden",
+          padding: "44px 52px",
+          color: "#eeeae1",
+          background: "#0b0d10",
           fontFamily: "Arial, Helvetica, sans-serif",
         }}
       >
-        <div
-          style={{
-            width: "58%",
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "space-between",
-            padding: "42px 50px",
-            borderRight: "2px solid rgba(21,22,23,.25)",
-          }}
-        >
-          <div style={{ display: "flex", justifyContent: "space-between", fontSize: 16, textTransform: "uppercase", letterSpacing: 2.5 }}>
-            <span>Gabriele Armento</span>
-            <span>Builder · Italy</span>
-          </div>
-          <div style={{ display: "flex", flexDirection: "column", fontSize: 88, fontWeight: 700, lineHeight: 0.84, letterSpacing: -6 }}>
-            <span>Ideas are cheap.</span>
-            <span style={{ color: "#ff6b5e", WebkitTextStroke: "2px #151617" }}>
-              Evidence is the work.
-            </span>
-          </div>
-          <div style={{ display: "flex", justifyContent: "space-between", paddingTop: 18, borderTop: "2px solid rgba(21,22,23,.25)", fontSize: 16 }}>
-            <span>Research · Data · Markets · AI</span>
-            <span>GA</span>
-          </div>
+        <div style={{ display: "flex", justifyContent: "space-between", paddingBottom: 18, borderBottom: "1px solid rgba(238,234,225,.2)", fontSize: 15, letterSpacing: 2.2, textTransform: "uppercase" }}>
+          <span>Gabriele Armento</span>
+          <span style={{ color: "#8b919a" }}>Founder + software builder · Italy</span>
         </div>
 
-        <div
-          style={{
-            width: "42%",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            position: "relative",
-            overflow: "hidden",
-            color: "#f3f0e8",
-            background: "#151617",
-          }}
-        >
-          <div style={{ position: "absolute", top: 42, left: 38, right: 38, display: "flex", justifyContent: "space-between", fontSize: 15, textTransform: "uppercase", letterSpacing: 2 }}>
-            <span>Ideas in motion</span>
-            <span>04 active worlds</span>
-          </div>
-          <div style={{ width: 330, height: 330, display: "flex", alignItems: "center", justifyContent: "center", border: "2px solid rgba(243,240,232,.55)", borderRadius: 999, boxShadow: "0 0 0 58px rgba(243,240,232,.12), 0 0 0 116px rgba(243,240,232,.06)" }}>
-            <div style={{ position: "absolute", top: 152, right: 95, width: 58, height: 58, display: "flex", borderRadius: 999, background: "#9ee8ff", boxShadow: "0 0 0 7px #151617, 0 0 0 9px #9ee8ff" }} />
-            <div style={{ position: "absolute", bottom: 125, left: 78, width: 48, height: 48, display: "flex", borderRadius: 999, background: "#ff6b5e", boxShadow: "0 0 0 7px #151617, 0 0 0 9px #ff6b5e" }} />
-            <div style={{ position: "absolute", bottom: 65, right: 145, width: 33, height: 33, display: "flex", borderRadius: 999, background: "#d7ff58" }} />
-            <div style={{ width: 120, height: 120, display: "flex", alignItems: "center", justifyContent: "center", borderRadius: 999, background: "#f3f0e8", color: "#151617", fontSize: 32, fontWeight: 700 }}>
-              GA
-            </div>
-          </div>
+        <div style={{ display: "flex", flexDirection: "column", fontSize: 102, fontWeight: 600, lineHeight: 0.9, letterSpacing: -7 }}>
+          <span>Ideas are cheap.</span>
+          <span style={{ marginTop: 16, color: "#c8c4bb", fontFamily: "Georgia, serif", fontStyle: "italic", fontWeight: 400, letterSpacing: -4 }}>
+            Evidence is the work.
+          </span>
         </div>
+
+        <div style={{ display: "flex", justifyContent: "space-between", paddingTop: 18, borderTop: "1px solid rgba(238,234,225,.2)", color: "#8b919a", fontSize: 14, letterSpacing: 1.7, textTransform: "uppercase" }}>
+          <span>Markets · Energy · Data · Forecasting</span>
+          <span>Make the reasoning visible</span>
+        </div>
+
+        <div style={{ position: "absolute", top: -40, right: 90, width: 155, height: 155, display: "flex", borderRadius: 999, background: "#a6684f", opacity: 0.7, boxShadow: "inset -30px -24px 45px rgba(0,0,0,.38)" }} />
+        <div style={{ position: "absolute", right: -45, bottom: 88, width: 125, height: 125, display: "flex", borderRadius: 999, background: "#6e829c", opacity: 0.65, boxShadow: "inset -25px -20px 38px rgba(0,0,0,.4)" }} />
+        <div style={{ position: "absolute", bottom: -58, left: 175, width: 112, height: 112, display: "flex", transform: "rotate(24deg)", background: "#82927b", opacity: 0.62, boxShadow: "inset -22px -18px 35px rgba(0,0,0,.38)" }} />
       </div>
     ),
     size,
