@@ -33,7 +33,7 @@ export default function OpenGraphImage() {
           </div>
           <div style={{ display: "flex", flexDirection: "column", fontSize: 88, fontWeight: 700, lineHeight: 0.84, letterSpacing: -6 }}>
             <span>Ideas are cheap.</span>
-            <span style={{ color: "#a8e7ff", WebkitTextStroke: "2px #151617" }}>
+            <span style={{ color: "#ff6b5e", WebkitTextStroke: "2px #151617" }}>
               Evidence is the work.
             </span>
           </div>
@@ -50,15 +50,20 @@ export default function OpenGraphImage() {
             alignItems: "center",
             justifyContent: "center",
             position: "relative",
-            background: "#a8e7ff",
+            overflow: "hidden",
+            color: "#f3f0e8",
+            background: "#151617",
           }}
         >
           <div style={{ position: "absolute", top: 42, left: 38, right: 38, display: "flex", justifyContent: "space-between", fontSize: 15, textTransform: "uppercase", letterSpacing: 2 }}>
-            <span>Signal</span>
-            <span>Noise</span>
+            <span>Ideas in motion</span>
+            <span>04 active worlds</span>
           </div>
-          <div style={{ width: 330, height: 330, display: "flex", alignItems: "center", justifyContent: "center", border: "2px solid #151617", borderRadius: 999, boxShadow: "0 0 0 58px rgba(21,22,23,.05), 0 0 0 116px rgba(21,22,23,.035)" }}>
-            <div style={{ width: 120, height: 120, display: "flex", alignItems: "center", justifyContent: "center", borderRadius: 999, background: "#151617", color: "#a8e7ff", fontSize: 32, fontWeight: 700 }}>
+          <div style={{ width: 330, height: 330, display: "flex", alignItems: "center", justifyContent: "center", border: "2px solid rgba(243,240,232,.55)", borderRadius: 999, boxShadow: "0 0 0 58px rgba(243,240,232,.12), 0 0 0 116px rgba(243,240,232,.06)" }}>
+            <div style={{ position: "absolute", top: 152, right: 95, width: 58, height: 58, display: "flex", borderRadius: 999, background: "#9ee8ff", boxShadow: "0 0 0 7px #151617, 0 0 0 9px #9ee8ff" }} />
+            <div style={{ position: "absolute", bottom: 125, left: 78, width: 48, height: 48, display: "flex", borderRadius: 999, background: "#ff6b5e", boxShadow: "0 0 0 7px #151617, 0 0 0 9px #ff6b5e" }} />
+            <div style={{ position: "absolute", bottom: 65, right: 145, width: 33, height: 33, display: "flex", borderRadius: 999, background: "#d7ff58" }} />
+            <div style={{ width: 120, height: 120, display: "flex", alignItems: "center", justifyContent: "center", borderRadius: 999, background: "#f3f0e8", color: "#151617", fontSize: 32, fontWeight: 700 }}>
               GA
             </div>
           </div>
