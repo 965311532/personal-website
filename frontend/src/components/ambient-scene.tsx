@@ -27,14 +27,17 @@ export function AmbientScene() {
 
     let renderer: THREE.WebGLRenderer;
     try {
-      renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true, powerPreference: "high-performance" });
+      renderer = new THREE.WebGLRenderer({
+        alpha: true,
+        antialias: !window.matchMedia("(max-width: 719px)").matches,
+        powerPreference: "high-performance",
+      });
     } catch {
       mount.dataset.webgl = "false";
       return;
     }
 
     renderer.setClearColor(0x000000, 0);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.75));
     renderer.outputColorSpace = THREE.SRGBColorSpace;
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
     renderer.toneMappingExposure = 1.28;
@@ -92,10 +95,10 @@ export function AmbientScene() {
     ];
 
     const meshes = [
-      new THREE.Mesh(new THREE.TorusKnotGeometry(0.48, 0.14, 112, 14, 2, 3), materials[0]),
-      new THREE.Mesh(new THREE.SphereGeometry(0.56, 36, 28), materials[1]),
+      new THREE.Mesh(new THREE.TorusKnotGeometry(0.48, 0.14, 96, 12, 2, 3), materials[0]),
+      new THREE.Mesh(new THREE.SphereGeometry(0.56, 28, 20), materials[1]),
       new THREE.Mesh(new THREE.IcosahedronGeometry(0.61, 1), materials[2]),
-      new THREE.Mesh(new THREE.BoxGeometry(0.76, 0.76, 0.76, 3, 3, 3), materials[3]),
+      new THREE.Mesh(new THREE.BoxGeometry(0.76, 0.76, 0.76), materials[3]),
     ];
 
     const floaters: FloatingObject[] = meshes.map((mesh, index) => ({
@@ -142,8 +145,10 @@ export function AmbientScene() {
     const resize = () => {
       const width = Math.max(mount.clientWidth, 1);
       const height = Math.max(mount.clientHeight, 1);
+      const pixelRatioCap = width < 720 ? 1.2 : 1.5;
       camera.aspect = width / height;
       camera.updateProjectionMatrix();
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, pixelRatioCap));
       renderer.setSize(width, height, false);
       placeObjects();
       renderer.render(scene, camera);
@@ -151,6 +156,9 @@ export function AmbientScene() {
     const resizeObserver = new ResizeObserver(resize);
     resizeObserver.observe(mount);
     resize();
+    const readyFrame = window.requestAnimationFrame(() => {
+      mount.dataset.ready = "true";
+    });
 
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     let frame = 0;
@@ -194,6 +202,7 @@ export function AmbientScene() {
 
     return () => {
       stopAnimation();
+      window.cancelAnimationFrame(readyFrame);
       document.removeEventListener("visibilitychange", onVisibilityChange);
       window.removeEventListener("scroll", onScroll);
       resizeObserver.disconnect();

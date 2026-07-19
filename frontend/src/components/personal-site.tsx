@@ -1,8 +1,35 @@
 "use client";
 
-import { useEffect } from "react";
+import { lazy, Suspense, useEffect, useState } from "react";
 import { ArrowUpRight, Github, Linkedin, Mail } from "lucide-react";
-import { AmbientScene } from "./ambient-scene";
+
+const LazyAmbientScene = lazy(() =>
+  import("./ambient-scene").then((module) => ({ default: module.AmbientScene })),
+);
+
+function DeferredAmbientScene() {
+  const [shouldLoad, setShouldLoad] = useState(false);
+
+  useEffect(() => {
+    const reveal = () => setShouldLoad(true);
+
+    if ("requestIdleCallback" in window) {
+      const idleId = window.requestIdleCallback(reveal, { timeout: 1200 });
+      return () => window.cancelIdleCallback(idleId);
+    }
+
+    const timeoutId = setTimeout(reveal, 350);
+    return () => clearTimeout(timeoutId);
+  }, []);
+
+  if (!shouldLoad) return null;
+
+  return (
+    <Suspense fallback={null}>
+      <LazyAmbientScene />
+    </Suspense>
+  );
+}
 
 const projects = [
   {
@@ -94,7 +121,7 @@ export function PersonalSite() {
 
   return (
     <main className="site-shell signal-site">
-      <AmbientScene />
+      <DeferredAmbientScene />
 
       <header className="signal-nav">
         <a className="signal-wordmark" href="#top" aria-label="Gabriele Armento, home">
