@@ -10,6 +10,8 @@ type FloatingObject = {
   speed: number;
   radiusX: number;
   radiusY: number;
+  radiusZ: number;
+  scale: number;
 };
 
 export function AmbientScene() {
@@ -34,65 +36,54 @@ export function AmbientScene() {
     renderer.setClearColor(0x000000, 0);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.75));
     renderer.outputColorSpace = THREE.SRGBColorSpace;
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 1.28;
     renderer.domElement.setAttribute("aria-hidden", "true");
     mount.appendChild(renderer.domElement);
 
-    scene.add(new THREE.HemisphereLight(0xeef4ff, 0x10131a, 2.7));
-    const key = new THREE.DirectionalLight(0xffd8c7, 5.1);
+    scene.add(new THREE.HemisphereLight(0xf5f8ff, 0x111725, 3.4));
+    const key = new THREE.DirectionalLight(0xffddcf, 6.2);
     key.position.set(-3, 5, 6);
     scene.add(key);
-    const rim = new THREE.PointLight(0x4f8dff, 30, 26);
+    const rim = new THREE.PointLight(0x5f9cff, 42, 28);
     rim.position.set(5, -2, 5);
     scene.add(rim);
 
-    const accent = new THREE.PointLight(0xff5f78, 18, 20);
+    const accent = new THREE.PointLight(0xff6b7f, 27, 22);
     accent.position.set(-5, 0, 3);
     scene.add(accent);
 
-    const distantObject = new THREE.Mesh(
-      new THREE.TorusGeometry(4.4, 0.54, 28, 128),
-      new THREE.MeshPhysicalMaterial({
-        color: 0x1b3558,
-        emissive: 0x07162e,
-        roughness: 0.38,
-        metalness: 0.5,
-        clearcoat: 0.42,
-        transparent: true,
-        opacity: 0.3,
-        depthWrite: false,
-      }),
-    );
-    distantObject.position.set(0.7, 0.2, -9.5);
-    distantObject.rotation.set(0.86, 0.18, -0.28);
-    scene.add(distantObject);
-
     const materials = [
       new THREE.MeshPhysicalMaterial({
-        color: 0xff725e,
-        emissive: 0x2b0906,
-        roughness: 0.25,
+        color: 0xff765f,
+        emissive: 0x5a1108,
+        emissiveIntensity: 0.72,
+        roughness: 0.2,
         metalness: 0.14,
         clearcoat: 0.92,
         clearcoatRoughness: 0.16,
       }),
       new THREE.MeshPhysicalMaterial({
-        color: 0x4c8dff,
-        emissive: 0x061631,
-        roughness: 0.16,
+        color: 0x5b9dff,
+        emissive: 0x092d6b,
+        emissiveIntensity: 0.82,
+        roughness: 0.12,
         metalness: 0.62,
         clearcoat: 0.72,
       }),
       new THREE.MeshPhysicalMaterial({
-        color: 0xa5dc67,
-        emissive: 0x102008,
-        roughness: 0.42,
+        color: 0xbaf06f,
+        emissive: 0x274a0b,
+        emissiveIntensity: 0.68,
+        roughness: 0.34,
         metalness: 0.06,
         flatShading: true,
       }),
       new THREE.MeshPhysicalMaterial({
-        color: 0xffc857,
-        emissive: 0x261603,
-        roughness: 0.2,
+        color: 0xffcf5a,
+        emissive: 0x5a3004,
+        emissiveIntensity: 0.7,
+        roughness: 0.16,
         metalness: 0.32,
         clearcoat: 0.7,
         transparent: true,
@@ -101,25 +92,30 @@ export function AmbientScene() {
     ];
 
     const meshes = [
-      new THREE.Mesh(new THREE.TorusKnotGeometry(0.42, 0.12, 96, 12, 2, 3), materials[0]),
-      new THREE.Mesh(new THREE.SphereGeometry(0.5, 32, 24), materials[1]),
-      new THREE.Mesh(new THREE.IcosahedronGeometry(0.54, 1), materials[2]),
-      new THREE.Mesh(new THREE.BoxGeometry(0.68, 0.68, 0.68, 3, 3, 3), materials[3]),
+      new THREE.Mesh(new THREE.TorusKnotGeometry(0.48, 0.14, 112, 14, 2, 3), materials[0]),
+      new THREE.Mesh(new THREE.SphereGeometry(0.56, 36, 28), materials[1]),
+      new THREE.Mesh(new THREE.IcosahedronGeometry(0.61, 1), materials[2]),
+      new THREE.Mesh(new THREE.BoxGeometry(0.76, 0.76, 0.76, 3, 3, 3), materials[3]),
     ];
 
     const floaters: FloatingObject[] = meshes.map((mesh, index) => ({
       mesh,
       anchor: new THREE.Vector3(),
       phase: [0.2, 1.7, 3.4, 5.1][index],
-      speed: [0.00016, 0.00011, 0.00013, 0.00009][index],
-      radiusX: [0.34, 0.46, 0.32, 0.42][index],
-      radiusY: [0.28, 0.22, 0.4, 0.26][index],
+      speed: [0.00024, 0.00017, 0.0002, 0.00015][index],
+      radiusX: [0.8, 0.92, 0.72, 0.86][index],
+      radiusY: [0.5, 0.44, 0.68, 0.48][index],
+      radiusZ: [0.48, 0.62, 0.44, 0.58][index],
+      scale: [0.98, 0.94, 1, 0.96][index],
     }));
-    meshes.forEach((mesh) => scene.add(mesh));
+    meshes.forEach((mesh, index) => {
+      mesh.scale.setScalar(floaters[index].scale);
+      scene.add(mesh);
+    });
 
     const wireShell = new THREE.LineSegments(
       new THREE.EdgesGeometry(new THREE.IcosahedronGeometry(0.73, 1)),
-      new THREE.LineBasicMaterial({ color: 0x72d9ff, transparent: true, opacity: 0.42 }),
+      new THREE.LineBasicMaterial({ color: 0x8ee7ff, transparent: true, opacity: 0.66 }),
     );
     scene.add(wireShell);
 
@@ -131,19 +127,16 @@ export function AmbientScene() {
     const placeObjects = () => {
       const mobile = mount.clientWidth < 720;
       const wide = mount.clientWidth / Math.max(mount.clientHeight, 1);
-      const horizontal = Math.min(4.7, 3.05 * wide);
+      const horizontal = Math.min(4.25, 2.65 * wide);
       const anchors = mobile
-        ? [[1.5, 2.5, -0.7], [-1.45, -2.4, 0.1], [1.55, -0.65, -1.1], [-1.4, 1.15, -1.5]]
-        : [[horizontal * 0.9, 2.35, -0.7], [-horizontal * 0.78, -1.75, 0], [horizontal * 0.76, -2.55, -1.2], [-horizontal * 0.68, 2.55, -1.6]];
+        ? [[1.05, 2.35, -0.65], [-1.1, -2.05, 0.05], [1.1, -0.55, -1.05], [-1.05, 1.1, -1.45]]
+        : [[horizontal * 0.72, 2.05, -0.45], [-horizontal * 0.68, -1.45, 0.18], [horizontal * 0.62, -2.05, -0.92], [-horizontal * 0.57, 2.15, -1.25]];
       floaters.forEach((floater, index) => {
         floater.anchor.set(anchors[index][0], anchors[index][1], anchors[index][2]);
         floater.mesh.visible = !mobile || index < 3;
       });
-      distantObject.scale.setScalar(mobile ? 0.78 : 1);
-      distantObject.position.x = mobile ? 1.25 : 0.7;
-      distantObject.position.z = mobile ? -10.5 : -9.5;
       wireShell.visible = !mobile;
-      wireShell.position.set(horizontal * 0.76, -2.55, -1.22);
+      wireShell.position.set(horizontal * 0.62, -2.05, -0.94);
     };
 
     const resize = () => {
@@ -168,24 +161,40 @@ export function AmbientScene() {
         const angle = time * floater.speed + floater.phase + scrollDrift * (index % 2 ? -1 : 1);
         floater.mesh.position.x = floater.anchor.x + Math.cos(angle) * floater.radiusX;
         floater.mesh.position.y = floater.anchor.y + Math.sin(angle * 1.35) * floater.radiusY;
-        floater.mesh.rotation.x = angle * (0.72 + index * 0.13);
-        floater.mesh.rotation.y = angle * (1.08 - index * 0.09);
+        floater.mesh.position.z = floater.anchor.z + Math.sin(angle * 0.82 + floater.phase) * floater.radiusZ;
+        floater.mesh.rotation.x = angle * (1.05 + index * 0.14);
+        floater.mesh.rotation.y = angle * (1.42 - index * 0.1);
+        floater.mesh.rotation.z = angle * (0.34 + index * 0.08);
       });
-      wireShell.rotation.x = time * 0.00006;
-      wireShell.rotation.y = time * -0.00009;
-      distantObject.position.y = 0.2 + Math.sin(time * 0.000035) * 0.16 - smoothScroll * 0.000035;
-      distantObject.rotation.x = 0.86 + time * 0.000008;
-      distantObject.rotation.y = 0.18 - time * 0.000012;
-      distantObject.rotation.z = -0.28 + time * 0.000006;
+      wireShell.rotation.x = time * 0.0001;
+      wireShell.rotation.y = time * -0.00015;
       renderer.render(scene, camera);
       frame = window.requestAnimationFrame(animate);
     };
 
+    const stopAnimation = () => {
+      window.cancelAnimationFrame(frame);
+      frame = 0;
+    };
+    const startAnimation = () => {
+      if (!reducedMotion && !document.hidden && frame === 0) {
+        frame = window.requestAnimationFrame(animate);
+      }
+    };
+    const onVisibilityChange = () => {
+      if (document.hidden) stopAnimation();
+      else startAnimation();
+    };
+
     if (reducedMotion) renderer.render(scene, camera);
-    else frame = window.requestAnimationFrame(animate);
+    else {
+      document.addEventListener("visibilitychange", onVisibilityChange);
+      startAnimation();
+    }
 
     return () => {
-      window.cancelAnimationFrame(frame);
+      stopAnimation();
+      document.removeEventListener("visibilitychange", onVisibilityChange);
       window.removeEventListener("scroll", onScroll);
       resizeObserver.disconnect();
       scene.traverse((object) => {
