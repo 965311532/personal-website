@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
-import { ArrowDown, ArrowUpRight, Github, Linkedin, Mail } from "lucide-react";
+import { ArrowUpRight, Github, Linkedin, Mail } from "lucide-react";
 import { AmbientScene } from "./ambient-scene";
 
 const projects = [
@@ -113,7 +113,6 @@ export function PersonalSite() {
       <section className="signal-hero" id="top">
         <div className="hero-kicker">
           <span>Founder &amp; software builder</span>
-          <span>Italy · 44° N</span>
         </div>
 
         <h1>
@@ -126,12 +125,6 @@ export function PersonalSite() {
             I build products and decision systems for uncertain environments —
             across markets, energy, data, and forecasting.
           </p>
-          <div className="hero-principle">
-            <strong>Make the reasoning visible.</strong>
-          </div>
-          <a href="#work">
-            Selected work <ArrowDown aria-hidden="true" size={16} />
-          </a>
         </div>
       </section>
 

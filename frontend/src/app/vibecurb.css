@@ -133,7 +133,7 @@ body {
 
 .hero-kicker {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   padding-bottom: 18px;
   border-bottom: 1px solid var(--line);
   color: var(--muted);
@@ -169,20 +169,11 @@ body {
 }
 
 .hero-footer {
-  display: grid;
-  grid-template-columns: minmax(260px, 1.35fr) minmax(220px, 0.8fr) auto;
-  gap: clamp(32px, 6vw, 100px);
-  align-items: end;
   padding-top: 22px;
   border-top: 1px solid var(--line);
 }
 
 .hero-footer > p { max-width: 47ch; margin: 0; color: var(--bone-soft); font-size: 0.92rem; line-height: 1.6; }
-.hero-principle { display: flex; align-items: center; }
-.hero-principle strong { color: var(--bone); font-size: 0.98rem; font-weight: 520; }
-.hero-footer > a { display: inline-flex; align-items: center; gap: 10px; color: var(--bone); white-space: nowrap; font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.06em; text-transform: uppercase; }
-.hero-footer > a svg { padding: 3px; border: 1px solid var(--line-strong); border-radius: 50%; transition: transform 220ms var(--hover); }
-.hero-footer > a:hover svg { transform: translateY(3px); }
 
 .work-section { padding: clamp(95px, 11vw, 170px) 3.5vw 0; background: rgb(8 11 15 / 70%); }
 
@@ -304,8 +295,6 @@ body {
   .signal-nav nav { display: none; }
   .signal-hero h1 { font-size: clamp(4.5rem, 14vw, 7.5rem); }
   .signal-hero h1 span { width: auto; max-width: none; white-space: normal; }
-  .hero-footer { grid-template-columns: 1fr 0.8fr; }
-  .hero-footer > a { grid-column: 1 / -1; }
   .work-intro { grid-template-columns: 0.5fr 1.5fr; }
   .work-intro > p { grid-column: 2; }
   .project-row { grid-template-columns: 58px 0.75fr 1.25fr; gap: 3vw; }
@@ -324,11 +313,7 @@ body {
   .signal-hero h1 { max-width: none; margin: 72px 0 86px; font-size: clamp(2.9rem, 12.5vw, 4.2rem); letter-spacing: -0.07em; line-height: 0.98; }
   .signal-hero h1 span { width: auto; max-width: none; white-space: normal; }
   .signal-hero h1 .hero-line-secondary { margin-top: 0.3em; font-size: 0.76em; line-height: 1.08; }
-  .hero-footer { display: grid; grid-template-columns: 1fr auto; gap: 20px 16px; align-items: end; width: 100%; }
-  .hero-footer > p { grid-column: 1 / -1; font-size: 0.83rem; }
-  .hero-principle { display: flex; }
-  .hero-principle strong { font-size: 0.76rem; }
-  .hero-footer > a { grid-column: auto; justify-self: end; font-size: 0.58rem; }
+  .hero-footer > p { font-size: 0.83rem; }
   .work-section { padding: 82px 20px 0; }
   .work-intro { display: block; padding-bottom: 72px; }
   .work-intro h2 { margin-top: 55px; font-size: clamp(3.2rem, 14vw, 4.7rem); }
