@@ -98,7 +98,8 @@ export function PersonalSite() {
 
       <header className="signal-nav">
         <a className="signal-wordmark" href="#top" aria-label="Gabriele Armento, home">
-          GABRIELE ARMENTO
+          <span className="signal-monogram">GA</span>
+          <span>GABRIELE ARMENTO</span>
         </a>
         <nav aria-label="Primary navigation">
           <a href="#work">Work</a>
@@ -117,8 +118,8 @@ export function PersonalSite() {
         </div>
 
         <h1>
-          Ideas are cheap.
-          <span>Evidence is the work.</span>
+          <span className="hero-line-primary">Ideas are cheap.</span>
+          <span className="hero-line-secondary">Evidence is the work.</span>
         </h1>
 
         <div className="hero-footer">
@@ -175,17 +176,17 @@ export function PersonalSite() {
           <p>Current focus · 2026</p>
         </div>
         <div className="now-statement">
-          <div>
-            <span className="now-status"><i /> Current portfolio</span>
+          <span className="now-status"><i /> Current portfolio</span>
+          <div className="now-statement-grid">
             <h2>4NACE</h2>
+            <p>
+              A portfolio studio for AI-applied products. Different markets, one
+              operating belief: shorten the distance between an idea and a verified outcome.
+            </p>
+            <a href="https://4nace.com" target="_blank" rel="noreferrer">
+              Visit 4nace.com <ExternalArrow />
+            </a>
           </div>
-          <p>
-            A portfolio studio for AI-applied products. Different markets, one
-            operating belief: shorten the distance between an idea and a verified outcome.
-          </p>
-          <a href="https://4nace.com" target="_blank" rel="noreferrer">
-            Visit 4nace.com <ExternalArrow />
-          </a>
         </div>
         <div className="now-details">
           <article className="now-detail">
@@ -242,7 +243,6 @@ export function PersonalSite() {
 
       <footer className="site-footer">
         <span>© 2026 Gabriele Armento</span>
-        <span>Independent builder / Italy</span>
         <a href="#top">Back to top ↑</a>
       </footer>
     </main>

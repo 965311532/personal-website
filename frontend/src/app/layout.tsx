@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Inter, Lexend } from "next/font/google";
+import { Fragment_Mono, Geist, Geist_Mono, Inter } from "next/font/google";
 import "./globals.css";
 import "./vibecurb.css";
 
@@ -18,9 +18,11 @@ const inter = Inter({
   subsets: ["latin"],
 });
 
-const lexend = Lexend({
-  variable: "--font-lexend",
+const fragmentMono = Fragment_Mono({
+  variable: "--font-fragment-mono",
   subsets: ["latin"],
+  style: ["normal", "italic"],
+  weight: "400",
 });
 
 export const metadata: Metadata = {
@@ -57,7 +59,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${geist.variable} ${geistMono.variable} ${inter.variable} ${lexend.variable}`}>
+      <body className={`${geist.variable} ${geistMono.variable} ${inter.variable} ${fragmentMono.variable}`}>
         {children}
       </body>
     </html>
