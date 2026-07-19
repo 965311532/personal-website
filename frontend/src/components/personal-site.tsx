@@ -98,7 +98,6 @@ export function PersonalSite() {
 
       <header className="signal-nav">
         <a className="signal-wordmark" href="#top" aria-label="Gabriele Armento, home">
-          <span className="signal-monogram">GA</span>
           <span>GABRIELE ARMENTO</span>
         </a>
         <nav aria-label="Primary navigation">
@@ -128,7 +127,6 @@ export function PersonalSite() {
             across markets, energy, data, and forecasting.
           </p>
           <div className="hero-principle">
-            <span>Operating principle</span>
             <strong>Make the reasoning visible.</strong>
           </div>
           <a href="#work">
@@ -225,7 +223,6 @@ export function PersonalSite() {
       <section className="contact-section" id="contact">
         <div className="contact-topline">
           <span>04 / Contact</span>
-          <span>Good questions are always welcome.</span>
         </div>
         <p>For collaborations, product conversations, or difficult technical problems.</p>
         <a className="contact-email" href="mailto:gabriele.armento@gmail.com">

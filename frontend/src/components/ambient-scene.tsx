@@ -49,6 +49,23 @@ export function AmbientScene() {
     accent.position.set(-5, 0, 3);
     scene.add(accent);
 
+    const distantObject = new THREE.Mesh(
+      new THREE.TorusGeometry(4.4, 0.54, 28, 128),
+      new THREE.MeshPhysicalMaterial({
+        color: 0x1b3558,
+        emissive: 0x07162e,
+        roughness: 0.38,
+        metalness: 0.5,
+        clearcoat: 0.42,
+        transparent: true,
+        opacity: 0.3,
+        depthWrite: false,
+      }),
+    );
+    distantObject.position.set(0.7, 0.2, -9.5);
+    distantObject.rotation.set(0.86, 0.18, -0.28);
+    scene.add(distantObject);
+
     const materials = [
       new THREE.MeshPhysicalMaterial({
         color: 0xff725e,
@@ -122,6 +139,9 @@ export function AmbientScene() {
         floater.anchor.set(anchors[index][0], anchors[index][1], anchors[index][2]);
         floater.mesh.visible = !mobile || index < 3;
       });
+      distantObject.scale.setScalar(mobile ? 0.78 : 1);
+      distantObject.position.x = mobile ? 1.25 : 0.7;
+      distantObject.position.z = mobile ? -10.5 : -9.5;
       wireShell.visible = !mobile;
       wireShell.position.set(horizontal * 0.76, -2.55, -1.22);
     };
@@ -153,6 +173,10 @@ export function AmbientScene() {
       });
       wireShell.rotation.x = time * 0.00006;
       wireShell.rotation.y = time * -0.00009;
+      distantObject.position.y = 0.2 + Math.sin(time * 0.000035) * 0.16 - smoothScroll * 0.000035;
+      distantObject.rotation.x = 0.86 + time * 0.000008;
+      distantObject.rotation.y = 0.18 - time * 0.000012;
+      distantObject.rotation.z = -0.28 + time * 0.000006;
       renderer.render(scene, camera);
       frame = window.requestAnimationFrame(animate);
     };
